@@ -304,4 +304,15 @@
     <string name="common_word_upload">上传</string>
     <string name="common_word_variable">变量</string>
     <string name="common_word_watch">观看</string>
+    <!-- Extracted from Java UI calls -->
+    <string name="common_word_code_editor">代码编辑器</string>
+    <string name="common_word_widget_id">控件 ID</string>
+    <string name="common_word_on">开</string>
+    <string name="common_word_off">关</string>
+    <string name="common_word_stop">停止</string>
+    <string name="common_word_copied">已复制</string>
+    <string name="common_word_show_error">显示错误</string>
+    <string name="common_word_open_app">打开应用</string>
+    <string name="common_word_apply">应用</string>
+    <string name="common_word_understood">明白</string>
 </resources>

@@ -263,11 +263,11 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     private void initializeAppBundleExportViews() {
         export_aab_button.setOnClickListener(view -> {
             MaterialAlertDialogBuilder confirmationDialog = new MaterialAlertDialogBuilder(this);
-            confirmationDialog.setTitle("Important note");
-            confirmationDialog.setMessage("The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias' password.");
+            confirmationDialog.setTitle(R.string.common_word_important_note);
+            confirmationDialog.setMessage(R.string.export_aab_signing_note);
             confirmationDialog.setIcon(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.setPositiveButton("Understood", (v, which) -> {
+            confirmationDialog.setPositiveButton(R.string.common_word_understood, (v, which) -> {
                 showAabSigningDialog();
                 v.dismiss();
             });
@@ -277,7 +277,8 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private void showAabSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
-                R.drawable.ic_mtrl_key, "Sign outputted AAB", "Fill in the keystore details to sign the AAB.");
+                R.drawable.ic_mtrl_key, getString(R.string.export_sign_output_aab_title),
+                getString(R.string.export_sign_output_aab_message));
         credentialsDialog.setListener(credentials -> {
             BuildingAsyncTask task = new BuildingAsyncTask(this, yq.ExportType.AAB);
             task.enableAppBundleBuild();
@@ -330,16 +331,11 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
         sign_apk_button.setOnClickListener(view -> {
             MaterialAlertDialogBuilder confirmationDialog = new MaterialAlertDialogBuilder(this);
-            confirmationDialog.setTitle("Important note");
-            confirmationDialog.setMessage("""
-                    To sign an APK, you need a keystore. Use your already created one, and copy it to \
-                    /Internal storage/sketchware/keystore/release_key.jks and enter the alias's password.
-                    
-                    Note that this only signs your APK using signing scheme V1, to target Android 11+ for example, \
-                    use a 3rd-party tool (for now).""");
+            confirmationDialog.setTitle(R.string.common_word_important_note);
+            confirmationDialog.setMessage(R.string.export_apk_signing_note);
             confirmationDialog.setIcon(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.setPositiveButton("Understood", (v, which) -> {
+            confirmationDialog.setPositiveButton(R.string.common_word_understood, (v, which) -> {
                 showApkSigningDialog();
                 v.dismiss();
             });
@@ -749,9 +745,9 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             if (buildingAppBundle && new File(Environment.getExternalStorageDirectory(), "sketchware" + File.separator + "signed_aab" + File.separator + aabFilename).exists()) {
                 MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(activity.get());
                 dialog.setIcon(R.drawable.open_box_48);
-                dialog.setTitle("Finished exporting AAB");
-                dialog.setMessage("You can find the generated, signed AAB file at:\n" +
-                        "/Internal storage/sketchware/signed_aab/" + aabFilename);
+                dialog.setTitle(R.string.export_aab_finished_title);
+                dialog.setMessage(activity.get().getString(R.string.export_aab_finished_path,
+                        "/Internal storage/sketchware/signed_aab/" + aabFilename));
                 dialog.setPositiveButton(Helper.getResString(R.string.common_word_ok), null);
                 dialog.show();
             }

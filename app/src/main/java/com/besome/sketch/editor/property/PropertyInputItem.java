@@ -349,7 +349,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
         });
 
         dialog.setNegativeButton(Helper.getResString(R.string.common_word_reset), null);
-        dialog.setNeutralButton("Custom", null);
+        dialog.setNeutralButton(R.string.common_word_custom, null);
 
         AlertDialog alertDialog = dialog.create();
 
@@ -383,11 +383,11 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
                     binding.sliderSection.setVisibility(View.GONE);
                     binding.tiInput.setVisibility(View.VISIBLE);
                     binding.edInput.requestFocus();
-                    customButton.setText("Slider");
+                    customButton.setText(R.string.common_word_slider);
                 } else {
                     binding.sliderSection.setVisibility(View.VISIBLE);
                     binding.tiInput.setVisibility(View.GONE);
-                    customButton.setText("Custom");
+                    customButton.setText(R.string.common_word_custom);
                 }
             });
 
@@ -478,7 +478,8 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
 
         PropertyPopupInputTextBinding binding = PropertyPopupInputTextBinding.inflate(LayoutInflater.from(getContext()));
 
-        binding.tiInput.setHint(String.format(Helper.getResString(R.string.property_enter_value), "widget ID"));
+        binding.tiInput.setHint(String.format(Helper.getResString(R.string.property_enter_value),
+                Helper.getResString(R.string.common_word_widget_id)));
 
         binding.edInput.setSingleLine();
         PropertyNameValidator validator = new PropertyNameValidator(context, binding.tiInput, uq.b, uq.a(), jC.a(sc_id).a(projectFileBean), value);
@@ -958,7 +959,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
                         var builder =
                                 new MaterialAlertDialogBuilder(getContext())
                                         .setTitle(R.string.common_word_delete)
-                                        .setMessage("Are you sure you want to delete " + attr + "?")
+                                        .setMessage(Helper.getResString(R.string.property_confirm_delete, attr))
                                         .setPositiveButton(
                                                 R.string.common_word_yes,
                                                 (d, w) -> {
@@ -1002,7 +1003,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
         var binding = PropertyPopupParentAttrBinding.inflate(LayoutInflater.from(getContext()));
         dialog.setContentView(binding.getRoot());
 
-        binding.title.setText("Shortcuts");
+        binding.title.setText(R.string.common_word_shortcuts);
         binding.viewId.setVisibility(View.GONE);
         binding.sourceCode.setVisibility(View.GONE);
         binding.shortcuts.setVisibility(View.GONE);
@@ -1028,15 +1029,15 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
             @Override
             public void onItemLongClick(LinkedHashMap<String, String> attributes, String attr) {
                 new MaterialAlertDialogBuilder(getContext())
-                        .setTitle("Delete Shortcut")
-                        .setMessage("Delete " + attr + "?")
-                        .setPositiveButton("Delete", (d, w) -> {
+                        .setTitle(R.string.common_word_delete_shortcut)
+                        .setMessage(Helper.getResString(R.string.property_shortcut_delete_message, attr))
+                        .setPositiveButton(R.string.common_word_delete, (d, w) -> {
                             manager.removeShortcut(attr);
                             attributes.remove(attr);
                             adapter.submitList(new ArrayList<>(attributes.keySet()));
                             adapter.notifyDataSetChanged();
                         })
-                        .setNegativeButton("Cancel", null)
+                        .setNegativeButton(R.string.common_word_cancel, null)
                         .show();
             }
         });
@@ -1051,12 +1052,12 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
 
     private void showAddShortcutDialog(AttributeShortcutsManager manager, AttributesAdapter adapter) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
-        builder.setTitle("Add Shortcut");
+        builder.setTitle(R.string.common_word_add_shortcut);
 
         StyleEditorAddAttrBinding binding = StyleEditorAddAttrBinding.inflate(LayoutInflater.from(getContext()));
         builder.setView(binding.getRoot());
 
-        builder.setPositiveButton("Save", (dialog, which) -> {
+        builder.setPositiveButton(R.string.common_word_save, (dialog, which) -> {
             String name = binding.attrName.getText().toString().trim();
             String value = binding.attrValue.getText().toString().trim();
 
@@ -1072,13 +1073,13 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
             }
         });
 
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(R.string.common_word_cancel, null);
         builder.show();
     }
 
     private void addNewAttribute(Map<String, String> attributes) {
         var builder = new MaterialAlertDialogBuilder(getContext());
-        builder.setTitle("Add new attribute");
+        builder.setTitle(R.string.property_add_new_attribute);
 
         PropertyPopupInputTextBinding binding =
                 PropertyPopupInputTextBinding.inflate(LayoutInflater.from(getContext()));
@@ -1086,7 +1087,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
         var input = binding.edTiAutoCompleteInput;
         binding.tiInput.setVisibility(View.GONE);
         binding.tiAutoCompleteInput.setVisibility(View.VISIBLE);
-        binding.tiAutoCompleteInput.setHint("Enter new attribute");
+        binding.tiAutoCompleteInput.setHint(R.string.property_enter_new_attribute);
         input.setAdapter(
                 new ArrayAdapter<>(
                         getContext(),

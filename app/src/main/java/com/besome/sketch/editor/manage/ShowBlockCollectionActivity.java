@@ -169,7 +169,7 @@ public class ShowBlockCollectionActivity extends BaseAppCompatActivity implement
             addBlocks(block.blocks);
             resizeBottomViews();
         } else {
-            SketchwareUtil.toastError("Can't open corrupt Block");
+            SketchwareUtil.toastError(getString(R.string.block_corrupt_error));
             finish();
         }
     }
@@ -193,7 +193,7 @@ public class ShowBlockCollectionActivity extends BaseAppCompatActivity implement
             if (ImageFactory.saveBitmap(binding.editor.getChildAt(0), blockName).exists()) {
                 SketchwareUtil.toast("Saved image to /Internal storage/sketchware/saved_block/" + blockName + ".png!");
             } else {
-                SketchwareUtil.toastError("Couldn't save image");
+                SketchwareUtil.toastError(getString(R.string.image_save_failed));
             }
         }
 

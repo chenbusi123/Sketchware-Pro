@@ -337,4 +337,15 @@
     <string name="common_word_upload">Upload</string>
     <string name="common_word_variable">Variable</string>
     <string name="common_word_watch">Watch</string>
+    <!-- Extracted from Java UI calls -->
+    <string name="common_word_code_editor">Code Editor</string>
+    <string name="common_word_widget_id">widget ID</string>
+    <string name="common_word_on">ON</string>
+    <string name="common_word_off">OFF</string>
+    <string name="common_word_stop">Stop</string>
+    <string name="common_word_copied">Copied</string>
+    <string name="common_word_show_error">Show error</string>
+    <string name="common_word_open_app">Open App</string>
+    <string name="common_word_apply">Apply</string>
+    <string name="common_word_understood">Understood</string>
 </resources>

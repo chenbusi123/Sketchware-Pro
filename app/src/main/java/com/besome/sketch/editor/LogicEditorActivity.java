@@ -1388,11 +1388,11 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
                     typeface = Typeface.createFromFile(fontFile);
                 } catch (Exception e) {
                     typeface = Typeface.DEFAULT;
-                    preview.setText("Couldn't load font");
+                    preview.setText(R.string.font_load_failed);
                 }
             } else {
                 typeface = Typeface.DEFAULT;
-                preview.setText("Couldn't load font");
+                preview.setText(R.string.font_load_failed);
             }
         }
 
@@ -1585,7 +1585,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         }
 
         dialog.setView(dialogBinding.getRoot());
-        dialog.setNeutralButton("Code Editor", (v, which) -> {
+        dialog.setNeutralButton(R.string.common_word_code_editor, (v, which) -> {
             AsdDialog editor = new AsdDialog(this);
             editor.setContent(ss.getArgValue().toString());
             editor.show();
