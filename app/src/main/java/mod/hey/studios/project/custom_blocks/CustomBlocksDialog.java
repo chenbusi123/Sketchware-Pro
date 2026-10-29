@@ -235,19 +235,19 @@ public class CustomBlocksDialog {
 
     private boolean validateInput(DialogPaletteBinding binding, String name, String color) {
         if (name.isEmpty()) {
-            binding.name.setError("Name cannot be empty");
+            binding.name.setError(binding.getRoot().getContext().getString(R.string.java_name_empty));
             binding.name.requestFocus();
             return false;
         }
         if (color.isEmpty()) {
-            binding.color.setError("Color cannot be empty");
+            binding.color.setError(binding.getRoot().getContext().getString(R.string.java_color_empty));
             binding.color.requestFocus();
             return false;
         }
         try {
             Color.parseColor(color);
         } catch (IllegalArgumentException e) {
-            binding.color.setError("Invalid hexadecimal color");
+            binding.color.setError(binding.getRoot().getContext().getString(R.string.java_hex_color_invalid));
             binding.color.requestFocus();
             return false;
         }

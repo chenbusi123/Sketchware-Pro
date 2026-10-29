@@ -325,7 +325,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
      */
     private void indicateCompileErrorOccurred(String error) {
         new CompileErrorSaver(sc_id).writeLogsToFile(error);
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Show compile log", Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.java_show_compile_log, Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(Helper.getResString(R.string.common_word_show), v -> {
             if (!mB.a()) {
                 snackbar.dismiss();
@@ -403,7 +403,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
         startActivity(intent);
 
-        Snackbar.make(coordinatorLayout, "App install prompt launched", Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(coordinatorLayout, R.string.java_install_prompt_launched, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.common_word_open_app, v -> {
                     Intent launchIntent = getPackageManager().getLaunchIntentForPackage(q.packageName);
                     if (launchIntent != null) {

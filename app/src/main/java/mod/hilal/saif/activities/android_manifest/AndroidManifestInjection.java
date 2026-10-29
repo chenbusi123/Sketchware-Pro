@@ -169,7 +169,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                 SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
                 v.dismiss();
             } else {
-                activity_name_input.setError("Enter activity name");
+                activity_name_input.setError(getString(R.string.java_enter_activity_name));
             }
         });
         dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
@@ -193,7 +193,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                 SketchwareUtil.toast(getString(R.string.java_new_activity_added));
                 v.dismiss();
             } else {
-                activity_name_input.setError("Enter activity name");
+                activity_name_input.setError(getString(R.string.java_enter_activity_name));
             }
         });
         dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);

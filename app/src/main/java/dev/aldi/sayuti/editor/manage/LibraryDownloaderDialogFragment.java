@@ -133,14 +133,14 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
     private void initDownloadFlow() {
         dependencyName = Helper.getText(binding.dependencyInput);
         if (dependencyName.isEmpty()) {
-            binding.dependencyInputLayout.setError("Please enter a dependency");
+            binding.dependencyInputLayout.setError(getString(R.string.java_dependency_required));
             binding.dependencyInputLayout.setErrorEnabled(true);
             return;
         }
 
         var parts = dependencyName.split(":");
         if (parts.length != 3) {
-            binding.dependencyInputLayout.setError("Invalid dependency format");
+            binding.dependencyInputLayout.setError(getString(R.string.java_dependency_format_invalid));
             binding.dependencyInputLayout.setErrorEnabled(true);
             return;
         }
@@ -220,7 +220,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onVersionNotFound(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Version not available");
+                        item.setError(getString(R.string.java_version_unavailable));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -239,7 +239,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onDependenciesNotFound(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Dependencies not found");
+                        item.setError(getString(R.string.java_dependencies_not_found));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -248,7 +248,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onInvalidScope(@NonNull Artifact dep, @NonNull String scope) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Invalid scope: " + scope);
+                        item.setError(getString(R.string.java_scope_invalid, scope));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -257,7 +257,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void invalidPackaging(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Invalid packaging");
+                        item.setError(getString(R.string.java_packaging_invalid));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -307,7 +307,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void dexingFailed(@NonNull Artifact dependency, @NonNull Exception e) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dependency);
-                        item.setError("Dexing failed: " + e.getMessage());
+                        item.setError(getString(R.string.java_dexing_failed, e.getMessage()));
                         dependencyAdapter.updateDependency(item);
                         setDownloadState(false);
                         SketchwareUtil.showAnErrorOccurredDialog(getActivity(),

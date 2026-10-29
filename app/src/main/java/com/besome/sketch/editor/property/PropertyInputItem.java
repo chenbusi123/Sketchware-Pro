@@ -296,9 +296,9 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
                             binding.tiInput.setError(null);
                         } else {
                             if (key.equals("property_scale_x") || key.equals("property_scale_y")) {
-                                binding.tiInput.setError("Value must be 0.1 or greater");
+                                binding.tiInput.setError(context.getString(R.string.java_value_min_point_one));
                             } else {
-                                binding.tiInput.setError("Value must be 0 or greater");
+                                binding.tiInput.setError(context.getString(R.string.java_value_min_zero));
                             }
                         }
                     } else if (key.equals("property_progress") && bean != null) {
@@ -318,7 +318,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
                         }
                     }
                 } catch (NumberFormatException e) {
-                    binding.tiInput.setError("Invalid value");
+                    binding.tiInput.setError(context.getString(R.string.java_value_invalid));
                 }
             }
         });

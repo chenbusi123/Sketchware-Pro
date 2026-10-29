@@ -96,22 +96,22 @@ public class AppSettings extends BaseAppCompatActivity {
         managersCategory.setTitle(getString(R.string.common_word_managers));
         preferences.add(managersCategory);
 
-        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_block, "Block manager", "Manage your own blocks to use in Logic Editor", new ActivityLauncher(BlocksManager.class)), true);
-        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_pull_down, "Block selector menu manager", "Manage your own block selector menus", openSettingsActivity(SettingsActivity.BLOCK_SELECTOR_MANAGER_FRAGMENT)), true);
-        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_component, "Component manager", "Manage your own components", new ActivityLauncher(ManageCustomComponentActivity.class)), true);
-        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_list, "Event manager", "Manage your own events", openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT)), true);
-        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_box, "Local library manager", "Manage and download local libraries", new ActivityLauncher(ManageLocalLibraryActivity.class, new Pair<>("sc_id", "system"))), true);
+        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_block, getString(R.string.java_pref_block_manager), getString(R.string.java_pref_block_manager_desc), new ActivityLauncher(BlocksManager.class)), true);
+        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_pull_down, getString(R.string.java_pref_selector_manager), getString(R.string.java_pref_selector_manager_desc), openSettingsActivity(SettingsActivity.BLOCK_SELECTOR_MANAGER_FRAGMENT)), true);
+        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_component, getString(R.string.java_pref_component_manager), getString(R.string.java_pref_component_manager_desc), new ActivityLauncher(ManageCustomComponentActivity.class)), true);
+        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_list, getString(R.string.java_pref_event_manager), getString(R.string.java_pref_event_manager_desc), openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT)), true);
+        managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_box, getString(R.string.java_pref_local_library_manager), getString(R.string.java_pref_local_library_manager_desc), new ActivityLauncher(ManageLocalLibraryActivity.class, new Pair<>("sc_id", "system"))), true);
         managersCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_article, Helper.getResString(R.string.design_drawer_menu_title_logcat_reader), Helper.getResString(R.string.design_drawer_menu_subtitle_logcat_reader), new ActivityLauncher(LogReaderActivity.class)), false);
 
         LibraryCategoryView generalCategory = new LibraryCategoryView(this);
         generalCategory.setTitle(getString(R.string.common_word_general));
         preferences.add(generalCategory);
 
-        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_settings_applications, "App settings", "Change general app settings", new ActivityLauncher(ConfigActivity.class)), true);
+        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_settings_applications, getString(R.string.java_pref_app_settings), getString(R.string.java_pref_app_settings_desc), new ActivityLauncher(ConfigActivity.class)), true);
         generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_palette, Helper.getResString(R.string.settings_appearance), Helper.getResString(R.string.settings_appearance_description), openSettingsActivity(SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT)), true);
-        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_folder, "Open working directory", "Open Sketchware Pro's directory and edit files in it", v -> openWorkingDirectory()), true);
-        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_apk_document, "Sign an APK file with testkey", "Sign an already existing APK file with testkey and signature schemes up to V4", v -> signApkFileDialog()), true);
-        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_settings, Helper.getResString(R.string.main_drawer_title_system_settings), "Auto-save and vibrations", new ActivityLauncher(SystemSettingActivity.class)), false);
+        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_folder, getString(R.string.java_pref_working_directory), getString(R.string.java_pref_working_directory_desc), v -> openWorkingDirectory()), true);
+        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_apk_document, getString(R.string.java_pref_sign_apk), getString(R.string.java_pref_sign_apk_desc), v -> signApkFileDialog()), true);
+        generalCategory.addLibraryItem(createPreference(R.drawable.ic_mtrl_settings, Helper.getResString(R.string.main_drawer_title_system_settings), getString(R.string.java_pref_system_settings_desc), new ActivityLauncher(SystemSettingActivity.class)), false);
 
         preferences.forEach(content::addView);
     }
