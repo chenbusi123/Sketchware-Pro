@@ -34,7 +34,6 @@ import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.android_manifest.AndroidManifestInjector;
 import mod.remaker.view.CustomAttributeView;
-import pro.sketchware.R;
 import pro.sketchware.activities.editor.view.CodeViewerActivity;
 import pro.sketchware.databinding.AndroidManifestInjectionBinding;
 import pro.sketchware.utility.FileUtil;
@@ -167,7 +166,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (v, which) -> {
             if (!Helper.getText(activity_name_input).trim().isEmpty()) {
                 AndroidManifestInjector.setLauncherActivity(sc_id, Helper.getText(activity_name_input));
-                SketchwareUtil.toast("Saved");
+                SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
                 v.dismiss();
             } else {
                 activity_name_input.setError("Enter activity name");
@@ -191,7 +190,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (v, which) -> {
             if (!Helper.getText(activity_name_input).trim().isEmpty()) {
                 addNewActivity(Helper.getText(activity_name_input));
-                SketchwareUtil.toast("New Activity added");
+                SketchwareUtil.toast(getString(R.string.java_new_activity_added));
                 v.dismiss();
             } else {
                 activity_name_input.setError("Enter activity name");
@@ -293,7 +292,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         FileUtil.writeFile(path, getGson().toJson(data));
         refreshList();
         removeComponents(activity_name);
-        SketchwareUtil.toast("Activity removed");
+        SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_activity_removed));
     }
 
     private void removeComponents(String str) {

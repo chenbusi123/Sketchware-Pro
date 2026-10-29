@@ -123,8 +123,10 @@ public class ColorsEditor extends Fragment {
     private void updateNoContentLayout() {
         if (colorList.isEmpty()) {
             binding.noContentLayout.setVisibility(View.VISIBLE);
-            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title), "Color"));
-            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body), "color"));
+            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title),
+                    getString(R.string.java_resource_colors)));
+            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body),
+                    getString(R.string.java_resource_colors)));
         } else {
             binding.noContentLayout.setVisibility(View.GONE);
         }
@@ -156,10 +158,10 @@ public class ColorsEditor extends Fragment {
             dialogBinding.colorPreview.setBackgroundColor(PropertiesUtil.parseColor(colorsEditorManager.getColorValue(activity.getApplicationContext(), colorModel.getColorValue(), 3, isNightVariant)));
             dialogBinding.importantNote.setVisibility(defaultColors.containsKey(colorModel.getColorName()) ? View.VISIBLE : View.GONE);
 
-            dialog.setTitle("Edit color");
+            dialog.setTitle(pro.sketchware.R.string.common_word_edit_color);
 
         } else {
-            dialog.setTitle("Create new color");
+            dialog.setTitle(R.string.java_create_new_color);
             dialogBinding.colorPreview.setBackgroundColor(0xFFFFFF);
         }
 
@@ -205,18 +207,18 @@ public class ColorsEditor extends Fragment {
             }
         });
 
-        dialog.setPositiveButton("Save", (v1, which) -> {
+        dialog.setPositiveButton(pro.sketchware.R.string.myprojects_settings_button_save, (v1, which) -> {
             String key = Objects.requireNonNull(dialogBinding.colorKeyInput.getText()).toString();
             String value = Objects.requireNonNull(dialogBinding.colorValueInput.getText()).toString();
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toastError("Please fill in all fields", Toast.LENGTH_SHORT);
+                SketchwareUtil.toastError(getString(R.string.java_fill_all_fields), Toast.LENGTH_SHORT);
                 return;
             }
 
             if (value.startsWith("#")) {
                 if (!PropertiesUtil.isHexColor(value)) {
-                    SketchwareUtil.toastError("Please enter a valid HEX color");
+                    SketchwareUtil.toastError(getString(R.string.java_valid_hex_required));
                     return;
                 }
             }
@@ -259,7 +261,7 @@ public class ColorsEditor extends Fragment {
         });
 
         if (colorModel != null && !defaultColors.containsKey(colorModel.getColorName())) {
-            dialog.setNeutralButton("Delete", (v1, which) -> {
+            dialog.setNeutralButton(pro.sketchware.R.string.myprojects_list_menu_title_delete, (v1, which) -> {
                 colorList.remove(position);
                 adapter.notifyItemRemoved(position);
                 adapter.notifyItemRangeChanged(position, colorList.size());

@@ -62,7 +62,6 @@ import a.a.a.mB;
 import a.a.a.uq;
 import a.a.a.yB;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
 import pro.sketchware.activities.resourceseditor.components.utils.StringsEditorManager;
 import pro.sketchware.databinding.PropertyInputItemBinding;
 import pro.sketchware.databinding.PropertyPopupHybridBinding;

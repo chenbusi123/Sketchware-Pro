@@ -154,7 +154,7 @@ public class EventsManagerCreatorFragment extends qA {
 
     private void save() {
         if (!filledIn()) {
-            SketchwareUtil.toast("Some required fields are empty!");
+            SketchwareUtil.toast(getString(R.string.java_required_fields_empty));
             return;
         }
         if (!OldResourceIdMapper.isValidIconId(Helper.getText(binding.eventsCreatorIcon))) {
@@ -189,7 +189,7 @@ public class EventsManagerCreatorFragment extends qA {
             arrayList.add(hashMap);
         }
         FileUtil.writeFile(concat, getGson().toJson(arrayList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
         getParentFragmentManager().popBackStack();
     }
 
@@ -210,12 +210,12 @@ public class EventsManagerCreatorFragment extends qA {
         configureToolbar(binding.toolbar);
 
         if (isEdit) {
-            binding.toolbar.setTitle("Event Properties");
+            binding.toolbar.setTitle(pro.sketchware.R.string.common_word_event_properties);
             binding.toolbar.setSubtitle(event_name);
         } else if (isActivityEvent) {
-            binding.toolbar.setTitle("New Activity Event");
+            binding.toolbar.setTitle(R.string.java_new_activity_event);
         } else {
-            binding.toolbar.setTitle("New Event");
+            binding.toolbar.setTitle(pro.sketchware.R.string.common_word_new_event);
             binding.toolbar.setSubtitle(lisName);
         }
     }

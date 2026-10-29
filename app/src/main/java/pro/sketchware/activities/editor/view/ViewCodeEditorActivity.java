@@ -101,7 +101,7 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
         projectLibrary = jC.c(sc_id).c();
         getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("XML Editor");
+        getSupportActionBar().setTitle(pro.sketchware.R.string.common_word_xml_editor);
         getSupportActionBar().setSubtitle(title);
         binding.toolbar.setNavigationOnClickListener(v -> {
             if (onBackPressedCallback.isEnabled()) {
@@ -223,8 +223,7 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
                     for (String attr : viewBean.parentAttributes.keySet()) {
                         String targetId = viewBean.parentAttributes.get(attr);
                         if (!detector.isLegalAttribute(targetId, attr)) {
-                            SketchwareUtil.toastError("Circular dependency found in \"" + viewBean.name + "\"\n" +
-                                    "Please resolve the issue before saving");
+                            SketchwareUtil.toastError(getString(R.string.java_circular_dependency, viewBean.name));
                             return;
                         }
                     }
@@ -235,9 +234,9 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
                 if (!isEdited) {
                     isEdited = true;
                 }
-                SketchwareUtil.toast("Saved");
+                SketchwareUtil.toast(getString(R.string.common_word_saved));
             } else {
-                SketchwareUtil.toast("No changes to save");
+                SketchwareUtil.toast(getString(R.string.java_no_changes_to_save));
             }
         } catch (Exception e) {
             SketchwareUtil.toastError(e.toString());

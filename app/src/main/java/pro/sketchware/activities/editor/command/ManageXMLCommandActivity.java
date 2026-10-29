@@ -45,7 +45,6 @@ import mod.hey.studios.util.Helper;
 import mod.hilal.saif.blocks.CommandBlock;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
-import pro.sketchware.R;
 import pro.sketchware.activities.editor.command.adapters.XMLCommandAdapter;
 import pro.sketchware.databinding.ManageXmlCommandAddBinding;
 import pro.sketchware.databinding.ManageXmlCommandBinding;
@@ -149,7 +148,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                                     MaterialAlertDialogBuilder dialog =
                                             new MaterialAlertDialogBuilder(this);
                                     dialog.setTitle(R.string.common_word_delete);
-                                    dialog.setMessage("Are you sure you want to delete this item?");
+                                    dialog.setMessage(R.string.java_confirm_delete_list_item);
                                     dialog.setPositiveButton(
                                             R.string.common_word_yes,
                                             (d, w) -> {
@@ -187,7 +186,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
         switch (item.getItemId()) {
             case 0 -> {
                 new MaterialAlertDialogBuilder(this)
-                        .setTitle("Select an XML")
+                        .setTitle(R.string.java_select_xml)
                         .setAdapter(
                                 new ArrayAdapter<>(
                                         this, android.R.layout.simple_list_item_1, xmlFiles),
@@ -260,11 +259,11 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                     var reference = Helper.getText(binding.reference);
                     var command = Helper.getText(binding.command);
                     if (TextUtils.isEmpty(xmlName)) {
-                        SketchwareUtil.toastError("XML name is required");
+                        SketchwareUtil.toastError(getString(R.string.java_xml_name_required));
                         return;
                     }
                     if (TextUtils.isEmpty(reference)) {
-                        SketchwareUtil.toastError("reference is required");
+                        SketchwareUtil.toastError(getString(R.string.java_reference_required));
                         return;
                     }
                     HashMap<String, Object> map = new HashMap<>();
@@ -299,9 +298,8 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
 
     private void showConfirmationDialog() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle("Confirmation");
-        dialog.setMessage(
-                "Would you like to enable the new XML Command? It will speed up XML generation and compilation, but this change cannot be undone. Don’t worry, your previous changes with the XML Command Block will transfered here so it will remain unaffected.");
+        dialog.setTitle(pro.sketchware.R.string.common_word_confirmation);
+        dialog.setMessage(R.string.java_enable_xml_command);
         dialog.setPositiveButton(
                 R.string.common_word_yes,
                 (d, w) -> {
@@ -332,7 +330,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                                     new MaterialAlertDialogBuilder(this)
                                             .setTitle(filename)
                                             .setCancelable(false)
-                                            .setPositiveButton("Dismiss", null);
+                                            .setPositiveButton(pro.sketchware.R.string.common_word_dismiss, null);
 
                             runOnUiThread(
                                     () -> {

@@ -76,7 +76,8 @@ public class GetKeyStoreCredentialsDialog {
                     ));
                 }
             } else {
-                SketchwareUtil.toastError("Keystore not found");
+                SketchwareUtil.toastError(binding.getRoot().getContext()
+                        .getString(R.string.java_keystore_not_found));
             }
         } else if (mode == SigningMode.TESTKEY) {
             dialogInterface.dismiss();

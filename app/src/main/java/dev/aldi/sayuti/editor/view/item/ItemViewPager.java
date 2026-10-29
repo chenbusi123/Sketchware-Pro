@@ -13,6 +13,7 @@ import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.editor.view.ItemView;
 
 import a.a.a.wB;
+import pro.sketchware.R;
 
 public class ItemViewPager extends AppCompatTextView implements ItemView {
 
@@ -32,7 +33,7 @@ public class ItemViewPager extends AppCompatTextView implements ItemView {
 
         setDrawingCacheEnabled(true);
         setTypeface(null, Typeface.BOLD);
-        setText("ViewPager");
+        setText(R.string.common_word_viewpager);
         setGravity(Gravity.CENTER);
     }
 

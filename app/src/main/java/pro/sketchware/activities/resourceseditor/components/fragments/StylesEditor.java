@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Objects;
 
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
 import pro.sketchware.activities.resourceseditor.ResourcesEditorActivity;
 import pro.sketchware.activities.resourceseditor.components.adapters.StylesAdapter;
 import pro.sketchware.activities.resourceseditor.components.models.StyleModel;
@@ -121,8 +120,10 @@ public class StylesEditor extends Fragment {
     private void updateNoContentLayout() {
         if (stylesList.isEmpty()) {
             binding.noContentLayout.setVisibility(View.VISIBLE);
-            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title), "Styles"));
-            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body), "styles"));
+            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title),
+                    getString(R.string.java_resource_styles)));
+            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body),
+                    getString(R.string.java_resource_styles)));
         } else {
             binding.noContentLayout.setVisibility(View.GONE);
         }
@@ -131,14 +132,14 @@ public class StylesEditor extends Fragment {
     public void showAddStyleDialog() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
         StyleEditorAddBinding binding = StyleEditorAddBinding.inflate(getLayoutInflater());
-        dialog.setTitle("Create new style");
-        dialog.setPositiveButton("Create", (d, which) -> {
+        dialog.setTitle(R.string.java_create_new_style);
+        dialog.setPositiveButton(pro.sketchware.R.string.myprojects_sign_apk_new_certificate_button_create, (d, which) -> {
             String styleName = Objects.requireNonNull(binding.styleName.getText()).toString();
             String parent = Objects.requireNonNull(binding.styleParent.getText()).toString();
             String header = Objects.requireNonNull(binding.styleHeaderInput.getText()).toString();
 
             if (styleName.isEmpty()) {
-                SketchwareUtil.toastError("Style name Input is Empty");
+                SketchwareUtil.toastError(getString(R.string.java_style_name_empty));
                 return;
             }
 
@@ -173,14 +174,14 @@ public class StylesEditor extends Fragment {
             binding.styleHeaderInput.setText(notesMap.get(position));
         }
 
-        dialog.setTitle("Edit style");
-        dialog.setPositiveButton("Edit", (d, which) -> {
+        dialog.setTitle(pro.sketchware.R.string.common_word_edit_style);
+        dialog.setPositiveButton(pro.sketchware.R.string.common_word_edit, (d, which) -> {
             String styleName = Objects.requireNonNull(binding.styleName.getText()).toString();
             String parent = Objects.requireNonNull(binding.styleParent.getText()).toString();
             String header = Objects.requireNonNull(binding.styleHeaderInput.getText()).toString();
 
             if (styleName.isEmpty()) {
-                SketchwareUtil.toastError("Style name Input is Empty");
+                SketchwareUtil.toastError(getString(R.string.java_style_name_empty));
                 return;
             }
 
@@ -196,7 +197,7 @@ public class StylesEditor extends Fragment {
         });
         dialog.setNeutralButton(Helper.getResString(R.string.common_word_delete), (d, which) -> new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.common_word_warning)
-                .setMessage("Are you sure you want to delete " + style.getStyleName() + "?")
+                .setMessage(getString(R.string.java_confirm_delete_named, style.getStyleName()))
                 .setPositiveButton(R.string.common_word_yes, (d2, w) -> {
                     stylesList.remove(position);
                     notesMap.remove(position);
@@ -205,7 +206,7 @@ public class StylesEditor extends Fragment {
                     updateNoContentLayout();
                     hasUnsavedChanges = true;
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(pro.sketchware.R.string.cancel, null)
                 .create()
                 .show());
         dialog.setNegativeButton(getString(R.string.cancel), null);
@@ -234,14 +235,14 @@ public class StylesEditor extends Fragment {
                     public void onItemLongClick(LinkedHashMap<String, String> attributes, String attr) {
                         new MaterialAlertDialogBuilder(requireContext())
                                 .setTitle(R.string.common_word_warning)
-                                .setMessage("Are you sure you want to delete " + attr + "?")
+                                .setMessage(getString(R.string.java_confirm_delete_named, attr))
                                 .setPositiveButton(R.string.common_word_yes, (d, w) -> {
                                     attributes.remove(attr);
                                     style.setAttributes(attributes);
                                     attributesAdapter.submitList(new ArrayList<>(attributes.keySet()));
                                     hasUnsavedChanges = true;
                                 })
-                                .setNegativeButton("Cancel", null)
+                                .setNegativeButton(pro.sketchware.R.string.cancel, null)
                                 .create()
                                 .show();
                     }
@@ -278,7 +279,7 @@ public class StylesEditor extends Fragment {
             String value = Objects.requireNonNull(binding.attrValue.getText()).toString();
 
             if (attribute.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toastError("Please fill in all fields");
+                SketchwareUtil.toastError(getString(R.string.java_fill_all_fields));
                 return;
             }
 

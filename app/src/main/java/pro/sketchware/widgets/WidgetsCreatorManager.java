@@ -114,7 +114,7 @@ public class WidgetsCreatorManager {
             );
             widgetConfigurationsList.removeIf(this::isInvalidWidget);
         } catch (Exception e) {
-            SketchwareUtil.toastError("Error loading widgets: " + e.getMessage());
+            SketchwareUtil.toastError(context.getString(R.string.java_widgets_load_failed, e.getMessage()));
             createWidgetsFile();
         }
     }
@@ -123,18 +123,18 @@ public class WidgetsCreatorManager {
         List<String> requiredKeys = Arrays.asList("Class", "title", "name", "inject", "type", "position");
 
         if (!widgetData.keySet().containsAll(requiredKeys)) {
-            SketchwareUtil.toastError("Missing required keys for widget: " + widgetData.get("title"));
+            SketchwareUtil.toastError(context.getString(R.string.java_widget_keys_missing, widgetData.get("title")));
             return true;
         }
 
         try {
             int typeId = ((Number) widgetData.get("type")).intValue();
             if (!availableWidgetsTypes.contains(String.valueOf(typeId))) {
-                SketchwareUtil.toastError("Invalid widget type: " + widgetData.get("title"));
+                SketchwareUtil.toastError(context.getString(R.string.java_widget_type_invalid, widgetData.get("title")));
                 return true;
             }
         } catch (Exception e) {
-            SketchwareUtil.toastError("Invalid type format for widget: " + widgetData.get("title"));
+            SketchwareUtil.toastError(context.getString(R.string.java_widget_type_format_invalid, widgetData.get("title")));
             return true;
         }
 
@@ -250,7 +250,7 @@ public class WidgetsCreatorManager {
                 viewEditorFragment.e();
                 v.dismiss();
             } catch (Exception e) {
-                SketchwareUtil.toastError("Failed: " + e.getMessage());
+                SketchwareUtil.toastError(context.getString(R.string.java_operation_failed, e.getMessage()));
             }
         });
 
@@ -278,7 +278,7 @@ public class WidgetsCreatorManager {
                 FilePickerOptions options = new FilePickerOptions();
                 options.setMultipleSelection(true);
                 options.setExtensions(new String[]{"json"});
-                options.setTitle("Select .json widgets files");
+                options.setTitle(context.getString(R.string.java_select_widget_json_files));
 
                 FilePickerCallback callback = new FilePickerCallback() {
                     @Override
@@ -291,7 +291,7 @@ public class WidgetsCreatorManager {
             } else {
                 String exportFilePath = widgetExportDirectoryPath + "allWidgets.json";
                 FileUtil.writeFile(exportFilePath, getGson().toJson(widgetConfigurationsList));
-                SketchwareUtil.toast("Exported in " + exportFilePath);
+                SketchwareUtil.toast(context.getString(R.string.java_exported_in, exportFilePath));
             }
             return true;
         });
@@ -333,7 +333,7 @@ public class WidgetsCreatorManager {
         if (!widgetConfigurationsList.isEmpty()) {
             FileUtil.writeFile(widgetsJsonFilePath, getGson().toJson(widgetConfigurationsList));
             viewEditorFragment.e();
-            SketchwareUtil.toast("Imported!");
+            SketchwareUtil.toast(context.getString(R.string.java_imported));
         }
     }
 
@@ -473,7 +473,7 @@ public class WidgetsCreatorManager {
         Activity activity = viewEditorFragment.requireActivity();
         DialogSelectorActionsBinding dialogBinding = DialogSelectorActionsBinding.inflate(LayoutInflater.from(activity));
         MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(activity);
-        dialogBuilder.setTitle("Actions");
+        dialogBuilder.setTitle(pro.sketchware.R.string.common_word_actions);
         dialogBuilder.setView(dialogBinding.getRoot());
 
         AlertDialog dialog = dialogBuilder.create();
@@ -488,7 +488,7 @@ public class WidgetsCreatorManager {
             HashMap<String, Object> mapToExport = widgetConfigurationsList.get(position);
             String exportFilePath = widgetExportDirectoryPath + mapToExport.get("title") + ".json";
             FileUtil.writeFile(exportFilePath, "[" + getGson().toJson(mapToExport) + "]");
-            SketchwareUtil.toast("Exported in " + exportFilePath);
+            SketchwareUtil.toast(context.getString(R.string.java_exported_in, exportFilePath));
             dialog.dismiss();
         });
         dialogBinding.delete.setOnClickListener(v -> {

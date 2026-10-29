@@ -135,7 +135,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     "Header (h)"
             );
             AtomicInteger choice = new AtomicInteger();
-            new MaterialAlertDialogBuilder(this).setTitle("Block type")
+            new MaterialAlertDialogBuilder(this).setTitle(pro.sketchware.R.string.common_word_block_type)
                     .setSingleChoiceItems(choices.toArray(new String[0]),
                             types.indexOf(Helper.getText(binding.type)), (dialog, which) -> choice.set(which))
                     .setPositiveButton(R.string.common_word_save, (dialog, which) -> binding.type.setText(types.get(choice.get())))
@@ -339,14 +339,14 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (mode.equals("add")) {
             blockPosition = Integer.parseInt(getIntent().getStringExtra("pallet"));
             binding.colour.setText(palletColour);
-            getSupportActionBar().setTitle("Add a new block");
+            getSupportActionBar().setTitle(R.string.java_add_new_block);
             return;
         }
         blockPosition = Integer.parseInt(getIntent().getStringExtra("pos"));
         binding.colour.setText(palletColour);
-        getSupportActionBar().setTitle("Insert block");
+        getSupportActionBar().setTitle(pro.sketchware.R.string.common_word_insert_block);
         if (mode.equals("edit")) {
-            getSupportActionBar().setTitle("Edit block");
+            getSupportActionBar().setTitle(pro.sketchware.R.string.common_word_edit_block);
             fillUpInputs(blockPosition);
         }
     }
@@ -445,7 +445,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     if (name instanceof String) {
                         id_detector.add((String) name);
                     } else {
-                        SketchwareUtil.toastError("Custom Block #" + i + " in current palette has an invalid name");
+                        SketchwareUtil.toastError(getString(R.string.java_custom_block_name_invalid, i));
                     }
                 }
                 return;
@@ -471,7 +471,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (matcher.find()) {
                 int position = matcher.end();
                 //Unable to resolve this error because the Rs class still undecompiled.
-                block.setText("Error: '%m' must be followed by '.param' at position " + position);
+                block.setText(getString(R.string.java_block_parameter_error, position));
             } else {
                 block.setText(e.toString());
             }
@@ -502,7 +502,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("palette", String.valueOf(blockPosition));
         blocksList.add(tempMap);
         FileUtil.writeFile(path, getGson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
         finish();
     }
 
@@ -527,7 +527,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("palette", blocksList.get(position).get("palette"));
         blocksList.add(position, tempMap);
         FileUtil.writeFile(path, getGson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
         finish();
     }
 
@@ -548,7 +548,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("imports", Helper.getText(binding.customImport));
         tempMap.put("code", Helper.getText(binding.code));
         FileUtil.writeFile(path, getGson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
         finish();
     }
 }

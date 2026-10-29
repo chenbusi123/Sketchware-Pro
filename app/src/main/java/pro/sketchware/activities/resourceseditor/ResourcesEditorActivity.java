@@ -203,7 +203,8 @@ public class ResourcesEditorActivity extends BaseAppCompatActivity {
         builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle(Helper.getResString(R.string.resources_manager_xml_load_failed_title))
                 .setMessage(String.format(Helper.getResString(R.string.resources_manager_xml_load_failed_message), title))
-                .setPositiveButton("Open code editor", (dialog, which) -> goToCodeEditor(title, contentPath))
+                .setPositiveButton(R.string.java_open_code_editor,
+                        (dialog, which) -> goToCodeEditor(title, contentPath))
                 .setNegativeButton(Helper.getResString(R.string.common_word_exit), (dialogInterface, i) -> finish())
                 .setCancelable(false)
                 .create()
@@ -398,7 +399,7 @@ public class ResourcesEditorActivity extends BaseAppCompatActivity {
         themesEditor.saveThemesFile();
         arraysEditor.saveArraysFile();
         updateProjectMetadata();
-        SketchwareUtil.toast("Save completed");
+        SketchwareUtil.toast(getString(R.string.common_word_save_completed));
     }
 
     private void updateProjectMetadata() {
@@ -547,7 +548,7 @@ public class ResourcesEditorActivity extends BaseAppCompatActivity {
             if (newVariant.startsWith(variantFullNameStarts)) {
                 initializeBackgroundTask(newVariant.replace("values", ""));
             } else {
-                SketchwareUtil.toastError("Invalid variant input");
+                SketchwareUtil.toastError(getString(R.string.java_invalid_variant_input));
             }
         } else {
             initializeBackgroundTask(variants.get(selectedChoice.get()).replace("values", ""));

@@ -38,6 +38,7 @@ import java.util.Map;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.LogUtil;
 import pro.sketchware.R;
+import pro.sketchware.SketchApplication;
 import pro.sketchware.databinding.DialogCreateNewFileLayoutBinding;
 import pro.sketchware.databinding.PreferenceActivityBinding;
 import pro.sketchware.utility.FileUtil;
@@ -120,7 +121,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 // fall-through to shared error handler
             }
 
-            SketchwareUtil.toastError("Couldn't parse App Settings! Restoring defaults.");
+            SketchwareUtil.toastError(SketchApplication.getContext()
+                    .getString(R.string.java_app_settings_parse_failed));
             LogUtil.e("ConfigActivity", "Failed to parse App Settings.", toLog);
         }
         settings = new HashMap<>();
@@ -174,7 +176,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
         var binding = PreferenceActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.topAppBar.setTitle("App Settings");
+        binding.topAppBar.setTitle(pro.sketchware.R.string.common_word_app_settings);
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         var fragment = new PreferenceFragment();
         fragment.setSnackbarView(binding.getRoot());
@@ -228,8 +230,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 binding.chipGroupTypes.setVisibility(View.GONE);
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle("Backup directory")
-                        .setMessage("Directory inside /Internal storage/, e.g. .sketchware/backups")
+                        .setTitle(pro.sketchware.R.string.common_word_backup_directory)
+                        .setMessage(R.string.java_backup_directory_help)
                         .setNegativeButton(R.string.common_word_cancel, null)
                         .setPositiveButton(R.string.common_word_save, null)
                         .create();
@@ -270,9 +272,9 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 boolean enabled = Boolean.TRUE.equals(newValue);
                 if (enabled && !Settings.canDrawOverlays(requireContext())) {
                     new MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("Display Over Other Apps Permission")
-                            .setMessage("Background building requires permission to display over other apps to show floating progress while Sketchware Pro is running in the background. Please enable this permission in settings.")
-                            .setPositiveButton("Settings", (dialog, which) -> {
+                            .setTitle(R.string.java_overlay_permission)
+                            .setMessage(R.string.java_overlay_permission_help)
+                            .setPositiveButton(pro.sketchware.R.string.common_word_settings, (dialog, which) -> {
                                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                                         Uri.parse("package:" + requireContext().getPackageName()));
                                 startActivity(intent);
@@ -300,22 +302,14 @@ public class ConfigActivity extends BaseAppCompatActivity {
 
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle("Backup filename format")
-                        .setMessage("This defines how SWB backup files get named.\n" +
-                                "Available variables:\n" +
-                                " - $projectName - Project name\n" +
-                                " - $versionCode - App version code\n" +
-                                " - $versionName - App version name\n" +
-                                " - $pkgName - App package name\n" +
-                                " - $timeInMs - Time during backup in milliseconds\n" +
-                                "\n" +
-                                "Additionally, you can format your own time like this using Java's date formatter syntax:\n" +
-                                "$time(yyyy-MM-dd'T'HHmmss)\n")
+                        .setTitle(R.string.java_backup_filename_format)
+                        .setMessage(R.string.java_backup_filename_help)
                         .setNegativeButton(R.string.common_word_cancel, null)
                         .setPositiveButton(R.string.common_word_save, null)
                         .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
                             getDataStore().putString(SETTING_BACKUP_FILENAME, null);
-                            Snackbar.make(snackbarView, "Reset to default complete.", BaseTransientBottomBar.LENGTH_SHORT).show();
+                            Snackbar.make(snackbarView, R.string.java_reset_default_complete,
+                                    BaseTransientBottomBar.LENGTH_SHORT).show();
                         })
                         .create();
 

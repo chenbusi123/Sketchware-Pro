@@ -12,6 +12,8 @@ import java.util.HashMap;
 
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.LogUtil;
+import pro.sketchware.R;
+import pro.sketchware.SketchApplication;
 import pro.sketchware.utility.FilePathUtil;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
@@ -49,7 +51,8 @@ public class ManageLocalLibrary {
                 // fall-through to shared error handler
             }
 
-            SketchwareUtil.toastError("Invalid Local library configuration found! Temporarily using none");
+            SketchwareUtil.toastError(SketchApplication.getContext()
+                    .getString(R.string.java_local_library_config_invalid));
         }
         list = new ArrayList<>();
     }
@@ -66,7 +69,8 @@ public class ManageLocalLibrary {
                 if (assetsPath instanceof String) {
                     assets.add((String) assetsPath);
                 } else {
-                    SketchwareUtil.toastError("Invalid assets path of enabled Local library #" + i, Toast.LENGTH_LONG);
+                    SketchwareUtil.toastError(SketchApplication.getContext().getString(
+                            R.string.java_local_library_path_invalid, "assets", i), Toast.LENGTH_LONG);
                 }
             }
         }
@@ -84,7 +88,8 @@ public class ManageLocalLibrary {
             if (dexPath instanceof String) {
                 dexes.add((String) dexPath);
             } else {
-                SketchwareUtil.toastError("Invalid DEX path of enabled Local library #" + i, Toast.LENGTH_LONG);
+                SketchwareUtil.toastError(SketchApplication.getContext().getString(
+                        R.string.java_local_library_path_invalid, "DEX", i), Toast.LENGTH_LONG);
             }
         }
 
@@ -153,7 +158,8 @@ public class ManageLocalLibrary {
             if (jarPath instanceof String) {
                 jars.add(new File((String) jarPath));
             } else {
-                SketchwareUtil.toastError("Invalid JAR path of enabled Local library #" + i + "->" + localLibrary.get("name"), Toast.LENGTH_LONG);
+                SketchwareUtil.toastError(SketchApplication.getContext().getString(
+                        R.string.java_local_library_jar_invalid, i, localLibrary.get("name")), Toast.LENGTH_LONG);
             }
         }
 
@@ -171,7 +177,8 @@ public class ManageLocalLibrary {
                 classpath.append(":");
                 classpath.append((String) jarPath);
             } else {
-                SketchwareUtil.toastError("Invalid JAR path of enabled Local library #" + i + "->" + localLibrary.get("name"), Toast.LENGTH_LONG);
+                SketchwareUtil.toastError(SketchApplication.getContext().getString(
+                        R.string.java_local_library_jar_invalid, i, localLibrary.get("name")), Toast.LENGTH_LONG);
             }
         }
 
@@ -203,7 +210,8 @@ public class ManageLocalLibrary {
                 if (packageName instanceof String) {
                     packageNames.add((String) packageName);
                 } else {
-                    SketchwareUtil.toastError("Invalid package name of enabled Local library #" + i, Toast.LENGTH_LONG);
+                    SketchwareUtil.toastError(SketchApplication.getContext().getString(
+                            R.string.java_local_library_path_invalid, "package name", i), Toast.LENGTH_LONG);
                 }
             }
         }
@@ -235,7 +243,8 @@ public class ManageLocalLibrary {
                 if (proguardRulesPath instanceof String) {
                     proguardRules.add((String) proguardRulesPath);
                 } else {
-                    SketchwareUtil.toastError("Invalid ProGuard path of enabled Local library #" + i, Toast.LENGTH_LONG);
+                    SketchwareUtil.toastError(SketchApplication.getContext().getString(
+                            R.string.java_local_library_path_invalid, "ProGuard", i), Toast.LENGTH_LONG);
                 }
             }
         }
@@ -254,7 +263,8 @@ public class ManageLocalLibrary {
                 if (resPath instanceof String) {
                     localLibraryRes.add((String) resPath);
                 } else {
-                    SketchwareUtil.toastError("Invalid res/ folder path of enabled Local library #" + i, Toast.LENGTH_LONG);
+                    SketchwareUtil.toastError(SketchApplication.getContext().getString(
+                            R.string.java_local_library_path_invalid, "res/", i), Toast.LENGTH_LONG);
                 }
             }
         }

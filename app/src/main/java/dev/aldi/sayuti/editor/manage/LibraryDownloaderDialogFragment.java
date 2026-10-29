@@ -159,10 +159,10 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
         }
 
         new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Confirm Download")
+                .setTitle(pro.sketchware.R.string.common_word_confirm_download)
                 .setMessage(message)
-                .setPositiveButton("Download", (dialog, which) -> startDownloadProcess(group, artifact, version))
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton(pro.sketchware.R.string.common_word_download, (dialog, which) -> startDownloadProcess(group, artifact, version))
+                .setNegativeButton(pro.sketchware.R.string.cancel, null)
                 .show();
     }
 
@@ -318,7 +318,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 @Override
                 public void onTaskCompleted(@NonNull List<String> dependencies) {
                     handler.post(() -> {
-                        SketchwareUtil.toast("Library downloaded successfully");
+                        SketchwareUtil.toast(requireContext().getString(R.string.java_library_downloaded));
                         if (!notAssociatedWithProject) {
                             var fileContent = FileUtil.readFile(localLibFile);
                             var enabledLibs = gson.fromJson(fileContent, Helper.TYPE_MAP_LIST);

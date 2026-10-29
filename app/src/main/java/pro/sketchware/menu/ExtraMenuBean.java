@@ -261,7 +261,7 @@ public class ExtraMenuBean {
             }
         }
 
-        dialog.setTitle("Select Permissions")
+        dialog.setTitle(pro.sketchware.R.string.common_word_select_permissions)
                 .setMultiChoiceItems(permission, checkedItems, (dialogInterface, which, isChecked) ->
                         checkedItems[which] = isChecked)
                 .setPositiveButton(R.string.common_word_select, (v, which) -> {
@@ -587,7 +587,7 @@ public class ExtraMenuBean {
                     }
                     if (!activityMenu.isEmpty()) {
                         TextView txt = new TextView(logicEditor);
-                        txt.setText("Custom Activities");
+                        txt.setText(R.string.common_word_custom_activities);
                         txt.setPadding((int) getDip(2), (int) getDip(4), (int) getDip(4), (int) getDip(4));
                         txt.setTextSize(14f);
                         viewGroup.addView(txt);
@@ -645,7 +645,7 @@ public class ExtraMenuBean {
             case "ResAttr":
             case "ResXml":
                 title = "Deprecated";
-                dialog.setMessage("This Block Menu was initially used to parse resource values, but was too I/O heavy and has been removed due to that. Please use the Code Editor instead.");
+                dialog.setMessage(R.string.java_block_menu_removed);
                 break;
 
             case "AdUnit":
@@ -751,7 +751,7 @@ public class ExtraMenuBean {
             v.dismiss();
         });
         dialog.setNegativeButton(R.string.common_word_cancel, null);
-        dialog.setNeutralButton("Code Editor", (v, which) -> {
+        dialog.setNeutralButton(pro.sketchware.R.string.common_word_code_editor, (v, which) -> {
             AsdDialog editor = new AsdDialog(logicEditor);
             editor.setContent(menu.getArgValue().toString());
             editor.show();
@@ -813,7 +813,7 @@ public class ExtraMenuBean {
             v.dismiss();
         });
         dialog.setNegativeButton(R.string.common_word_cancel, null);
-        dialog.setNeutralButton("Code Editor", (v, which) -> {
+        dialog.setNeutralButton(pro.sketchware.R.string.common_word_code_editor, (v, which) -> {
             AsdDialog asdDialog = new AsdDialog(logicEditor);
             asdDialog.setContent(Helper.getText(edittext));
             asdDialog.show();
@@ -831,11 +831,11 @@ public class ExtraMenuBean {
         mOptions.setSelectionMode(SelectionMode.BOTH);
         String path = null;
         if (menuName.equals("Assets")) {
-            mOptions.setTitle("Select an Asset");
+            mOptions.setTitle(logicEditor.getString(R.string.java_select_asset));
             path = String.format(ASSETS_PATH, sc_id);
             markedPath.add(0, path + ss.getArgValue().toString());
         } else if (menuName.equals("NativeLib")) {
-            mOptions.setTitle("Select a Native library");
+            mOptions.setTitle(logicEditor.getString(R.string.java_select_native_library));
             path = String.format(NATIVE_PATH, sc_id);
             markedPath.add(0, path + ss.getArgValue().toString());
         }
