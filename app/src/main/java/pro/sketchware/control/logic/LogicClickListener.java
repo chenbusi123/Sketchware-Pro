@@ -140,7 +140,7 @@ public class LogicClickListener implements View.OnClickListener {
             } else {
                 binding.nameLayout.requestFocus();
                 if (variableName.isEmpty()) {
-                    binding.nameLayout.setError(getContext().getString(R.string.java_name_empty));
+                    binding.nameLayout.setError(getContext().getString(R.string.java_name_cant_be_empty));
                     binding.nameLayout.setErrorEnabled(true);
                 }
                 return;
@@ -244,13 +244,13 @@ public class LogicClickListener implements View.OnClickListener {
             }
 
             CharSequence nameError = listBinding.nameLayout.getError();
-            if (nameError == null || getContext().getString(R.string.java_name_empty).contentEquals(nameError)) {
+            if (nameError == null || getContext().getString(R.string.java_name_cant_be_empty).contentEquals(nameError)) {
                 if (validName) {
                     listBinding.nameLayout.setError(null);
                     listBinding.nameLayout.setErrorEnabled(false);
                 } else {
                     listBinding.nameLayout.requestFocus();
-                    listBinding.nameLayout.setError(getContext().getString(R.string.java_name_empty));
+                    listBinding.nameLayout.setError(getContext().getString(R.string.java_name_cant_be_empty));
                     listBinding.nameLayout.setErrorEnabled(true);
                 }
             }

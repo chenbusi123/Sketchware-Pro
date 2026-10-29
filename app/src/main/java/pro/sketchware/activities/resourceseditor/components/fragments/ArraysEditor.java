@@ -304,7 +304,7 @@ public class ArraysEditor extends Fragment {
             binding.itemValue.requestFocus();
         }
 
-        dialog.setTitle(isEditing ? "Edit item" : "Create new item");
+        dialog.setTitle(isEditing ? R.string.java_edit_item : R.string.java_create_new_item);
 
         dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (d, which) -> {
             String attribute = Objects.requireNonNull(binding.itemName.getText()).toString();

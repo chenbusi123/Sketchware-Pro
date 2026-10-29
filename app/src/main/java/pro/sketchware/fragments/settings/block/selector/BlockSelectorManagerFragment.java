@@ -146,9 +146,9 @@ public class BlockSelectorManagerFragment extends qA {
         }
 
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
-        dialog.setTitle(!isEdit ? "New selector" : "Edit selector");
+        dialog.setTitle(!isEdit ? R.string.java_new_selector : R.string.java_edit_selector);
         dialog.setView(dialogBinding.getRoot());
-        dialog.setPositiveButton(!isEdit ? "Create" : "Save", (v, which) -> {
+        dialog.setPositiveButton(!isEdit ? R.string.myprojects_sign_apk_new_certificate_button_create : R.string.common_word_save, (v, which) -> {
             String selectorName = Helper.getText(dialogBinding.palettesPath);
             String selectorTitle = Objects.requireNonNull(dialogBinding.blocksPath.getText()).toString();
 

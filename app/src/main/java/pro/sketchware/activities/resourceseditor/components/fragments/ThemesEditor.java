@@ -260,7 +260,7 @@ public class ThemesEditor extends Fragment {
             binding.attrValue.setText(theme.getAttribute(attr));
         }
 
-        dialog.setTitle(isEditing ? "Edit attribute " : "Create new attribute");
+        dialog.setTitle(isEditing ? R.string.java_edit_attribute : R.string.java_create_new_attribute);
 
         dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (d, which) -> {
             String attribute = Objects.requireNonNull(binding.attrName.getText()).toString();

@@ -98,8 +98,8 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
         adapter.setOnItemClickListener(
                 item -> {
                     PopupMenu popupMenu = new PopupMenu(this, item.first);
-                    popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, "Edit");
-                    popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, "Delete");
+                    popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
+                    popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
                     popupMenu.setOnMenuItemClickListener(
                             itemMenu -> {
                                 int position = adapter.getCurrentList().indexOf(item.second);
@@ -157,7 +157,7 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
                     appCompats.add("NavigationDrawer");
                 }
                 if (appCompats.isEmpty()) {
-                    setNote("No options are found.", "No AppCompat options are currently available in this activity.");
+                    setNote(getString(R.string.java_no_options_found), getString(R.string.java_no_appcompat_options));
                 } else {
                     for (int i = 0; i < appCompats.size(); i++) {
                         TabLayout.Tab tab = binding.tabLayout.newTab();
@@ -170,11 +170,10 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
                     binding.fab.setVisibility(View.VISIBLE);
                 }
             } else {
-                setNote(
-                        "AppCompat is disabled.", "Please enable AppCompat in the Library Manager to use it.");
+                setNote(getString(R.string.java_appcompat_disabled), getString(R.string.java_enable_appcompat_manager));
             }
         } else {
-            setNote("Not available.", "You're not currently in the Activity layout.");
+            setNote(getString(R.string.java_not_available), getString(R.string.java_not_activity_layout));
         }
     }
 
@@ -251,7 +250,7 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
 
     private void dialog(String type, int position) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("create") ? "Add new attribute" : "Edit attribute");
+        dialog.setTitle(type.equals("create") ? R.string.java_add_new_attribute : R.string.java_edit_attribute);
         CustomDialogAttributeBinding attributeBinding =
                 CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());

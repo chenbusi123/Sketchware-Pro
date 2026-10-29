@@ -162,11 +162,11 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         menu.clear();
         if (Integer.parseInt(getIntent().getStringExtra("position")) != -1) {
             if (mode.equals("normal")) {
-                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Swap").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_swap_vertical)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Import");
-                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Export");
+                menu.add(Menu.NONE, 1, Menu.NONE, R.string.java_swap).setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_swap_vertical)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                menu.add(Menu.NONE, 2, Menu.NONE, R.string.common_word_import);
+                menu.add(Menu.NONE, 3, Menu.NONE, R.string.common_word_export);
             } else {
-                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Swap").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                menu.add(Menu.NONE, 1, Menu.NONE, R.string.java_swap).setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             }
         }
         return true;
@@ -174,9 +174,8 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
-        String title = menuItem.getTitle().toString();
-        switch (title) {
-            case "Swap":
+        switch (menuItem.getItemId()) {
+            case 1:
                 if (mode.equals("normal")) {
                     mode = "editor";
                     fabButtonVisibility(false);
@@ -191,11 +190,11 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 onCreateOptionsMenu(toolbar.getMenu());
                 break;
 
-            case "Import":
+            case 2:
                 openFileExplorerImport();
                 break;
 
-            case "Export":
+            case 3:
                 Object paletteName = pallet_list.get(palette - 9).get("name");
                 if (paletteName instanceof String) {
                     String exportTo = new File(BLOCK_EXPORT_PATH, paletteName + ".json").getAbsolutePath();

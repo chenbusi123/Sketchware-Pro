@@ -146,7 +146,7 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
     private void showAddDial() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("permission") ? "Add new permission" : "Add new attribute");
+        dialog.setTitle(type.equals("permission") ? R.string.java_add_new_permission : R.string.java_add_new_attribute);
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
         if (type.equals("permission")) {

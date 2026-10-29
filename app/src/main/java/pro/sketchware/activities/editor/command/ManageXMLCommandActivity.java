@@ -124,11 +124,11 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                     int position = item.second;
                     PopupMenu popupMenu = new PopupMenu(this, item.first);
                     var menu = popupMenu.getMenu();
-                    menu.add(Menu.NONE, 0, Menu.NONE, "Edit");
-                    menu.add(Menu.NONE, 1, Menu.NONE, "Delete");
-                    if (position != 0) menu.add(Menu.NONE, 2, Menu.NONE, "Move up");
+                    menu.add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
+                    menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
+                    if (position != 0) menu.add(Menu.NONE, 2, Menu.NONE, R.string.java_move_up);
                     if (position != adapter.getItemCount() - 1)
-                        menu.add(Menu.NONE, 3, Menu.NONE, "Move down");
+                        menu.add(Menu.NONE, 3, Menu.NONE, R.string.java_move_down);
 
                     popupMenu.setOnMenuItemClickListener(
                             itemMenu -> {
@@ -227,7 +227,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                     }
                 });
         dialog.show();
-        binding.title.setText(!edit ? "Add new command" : "Edit command");
+        binding.title.setText(!edit ? R.string.java_add_new_command : R.string.java_edit_command);
 
         if (edit) {
             var command = commands.get(position);

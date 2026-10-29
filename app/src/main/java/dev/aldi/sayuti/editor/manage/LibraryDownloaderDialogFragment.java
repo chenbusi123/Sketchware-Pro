@@ -153,9 +153,9 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
 
         String message;
         if (skipSubdependencies) {
-            message = "Are you sure you want to download " + dependencyName;
+            message = getString(R.string.java_confirm_download_dependency, dependencyName);
         } else {
-            message = "Are you sure you want to download " + dependencyName + " and its sub-dependencies?";
+            message = getString(R.string.java_confirm_download_dependency_with_subdependencies, dependencyName);
         }
 
         new MaterialAlertDialogBuilder(requireContext())

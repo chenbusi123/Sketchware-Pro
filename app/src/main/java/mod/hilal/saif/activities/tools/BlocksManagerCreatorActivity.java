@@ -178,7 +178,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!PropertiesUtil.isHexColor(s.toString())) {
-                    binding.colourLayout.setError(getString(R.string.java_hex_color_invalid));
+                    binding.colourLayout.setError(getString(R.string.java_hex_color_short_invalid));
                     binding.colourLayout.setErrorEnabled(true);
                 } else {
                     binding.colourLayout.setError(null);

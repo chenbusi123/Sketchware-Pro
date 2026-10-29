@@ -148,7 +148,7 @@ public class EventsManagerFragment extends qA {
         }
 
         var dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setTitle(existingListener == null ? "New Listener" : "Edit Listener")
+                .setTitle(existingListener == null ? R.string.java_new_listener : R.string.java_edit_listener)
                 .setView(listenerBinding.getRoot())
                 .setPositiveButton(pro.sketchware.R.string.myprojects_settings_button_save, (di, i) -> {
                     String listenerName = Helper.getText(listenerBinding.listenerName);

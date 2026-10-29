@@ -27,7 +27,7 @@ public class VariableTypeValidator extends MB {
         String reconsInput = String.join(" ", words);
 
         if (!variableType.equals(reconsInput)) {
-            b.setError(a.getString(R.string.java_extra_spaces_invalid));
+            b.setError(a.getString(R.string.java_extra_spaces_variable_invalid));
             d = false;
             return;
         }

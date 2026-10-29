@@ -183,7 +183,7 @@ public class ColorsEditor extends Fragment {
             public void afterTextChanged(Editable s) {
                 String value = s.toString();
                 if (value.startsWith("#") && !PropertiesUtil.isHexColor(value)) {
-                    dialogBinding.colorValueInputLayout.setError(getString(R.string.java_hex_color_invalid));
+                    dialogBinding.colorValueInputLayout.setError(getString(R.string.java_hex_color_upper_invalid));
                     return;
                 }
                 dialogBinding.colorValueInput.setError(null);

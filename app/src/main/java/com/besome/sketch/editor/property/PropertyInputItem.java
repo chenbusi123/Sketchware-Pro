@@ -307,14 +307,14 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
                             binding.slider.setValue(inputValue);
                             binding.tiInput.setError(null);
                         } else {
-                            binding.tiInput.setError(String.format("Value must be between 0 and %.0f", maxLimit));
+                            binding.tiInput.setError(context.getString(R.string.java_value_between_zero_max, maxLimit));
                         }
                     } else {
                         if (inputValue >= minValue && inputValue <= maxValue) {
                             binding.slider.setValue(inputValue);
                             binding.tiInput.setError(null);
                         } else {
-                            binding.tiInput.setError(String.format("Value must be between %.1f and %.1f", minValue, maxValue));
+                            binding.tiInput.setError(context.getString(R.string.java_value_between_min_max, minValue, maxValue));
                         }
                     }
                 } catch (NumberFormatException e) {
@@ -634,7 +634,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
                 }
 
                 boolean isExactMatch = keysList.contains(text);
-                textAutoCompleteInput.setError(isExactMatch ? null : "Not found in strings.xml");
+                textAutoCompleteInput.setError(isExactMatch ? null : context.getString(R.string.java_not_found_strings_xml));
             }
         });
     }

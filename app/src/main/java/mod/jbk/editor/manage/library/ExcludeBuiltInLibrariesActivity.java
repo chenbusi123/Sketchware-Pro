@@ -197,7 +197,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Reset")
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_reset)
                 .setIcon(AppCompatResources.getDrawable(this, R.drawable.history_24px))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
@@ -205,8 +205,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
-        String title = menuItem.getTitle().toString();
-        if (title.equals("Reset")) {
+        if (menuItem.getItemId() == 1) {
             showResetDialog();
         } else {
             return false;

@@ -116,7 +116,7 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
         EditorUtils.loadXmlConfig(editor);
         if (projectFile.fileType == ProjectFileBean.PROJECT_FILE_TYPE_ACTIVITY
                 && projectLibrary.isEnabled()) {
-            setNote("Use AppCompat Manager to modify attributes for CoordinatorLayout, Toolbar, and other appcompat layout/widget.");
+            setNote(getString(R.string.java_appcompat_editor_note));
         }
         binding.close.setOnClickListener(v -> {
             prefs.edit().putInt("note_" + sc_id, 1).apply();
@@ -133,21 +133,21 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, 0, Menu.NONE, "Undo")
+        menu.add(Menu.NONE, 0, Menu.NONE, R.string.common_word_undo)
                 .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_undo))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add(Menu.NONE, 1, Menu.NONE, "Redo")
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_redo)
                 .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_redo))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add(Menu.NONE, 2, Menu.NONE, "Save")
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.common_word_save)
                 .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         if (projectFile.fileType == ProjectFileBean.PROJECT_FILE_TYPE_ACTIVITY
                 && projectLibrary.isEnabled()) {
-            menu.add(Menu.NONE, 3, Menu.NONE, "Edit AppCompat");
+            menu.add(Menu.NONE, 3, Menu.NONE, R.string.java_edit_appcompat);
         }
-        menu.add(Menu.NONE, 4, Menu.NONE, "Reload color schemes");
-        menu.add(Menu.NONE, 5, Menu.NONE, "Layout Preview");
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.java_reload_color_schemes);
+        menu.add(Menu.NONE, 5, Menu.NONE, R.string.common_word_layout_preview);
         return true;
     }
 

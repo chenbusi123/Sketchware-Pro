@@ -70,7 +70,7 @@ public class ManageLocalLibrary {
                     assets.add((String) assetsPath);
                 } else {
                     SketchwareUtil.toastError(SketchApplication.getContext().getString(
-                            R.string.java_local_library_path_invalid, "assets", i), Toast.LENGTH_LONG);
+                            R.string.java_local_library_path_invalid, "assets path", i), Toast.LENGTH_LONG);
                 }
             }
         }
@@ -89,7 +89,7 @@ public class ManageLocalLibrary {
                 dexes.add((String) dexPath);
             } else {
                 SketchwareUtil.toastError(SketchApplication.getContext().getString(
-                        R.string.java_local_library_path_invalid, "DEX", i), Toast.LENGTH_LONG);
+                        R.string.java_local_library_path_invalid, "DEX path", i), Toast.LENGTH_LONG);
             }
         }
 
@@ -244,7 +244,7 @@ public class ManageLocalLibrary {
                     proguardRules.add((String) proguardRulesPath);
                 } else {
                     SketchwareUtil.toastError(SketchApplication.getContext().getString(
-                            R.string.java_local_library_path_invalid, "ProGuard", i), Toast.LENGTH_LONG);
+                            R.string.java_local_library_path_invalid, "ProGuard path", i), Toast.LENGTH_LONG);
                 }
             }
         }
@@ -264,7 +264,7 @@ public class ManageLocalLibrary {
                     localLibraryRes.add((String) resPath);
                 } else {
                     SketchwareUtil.toastError(SketchApplication.getContext().getString(
-                            R.string.java_local_library_path_invalid, "res/", i), Toast.LENGTH_LONG);
+                            R.string.java_local_library_path_invalid, "res/ folder path", i), Toast.LENGTH_LONG);
                 }
             }
         }

@@ -194,7 +194,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle(isFolder ? "Create a new folder" : "Create a new file")
+                .setTitle(isFolder ? R.string.java_create_new_folder : R.string.java_create_new_file)
                 .setMessage(getString(R.string.java_enter_new_item_name,
                         getString(isFolder ? R.string.java_item_folder : R.string.java_item_file)))
                 .setNegativeButton(pro.sketchware.R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss())

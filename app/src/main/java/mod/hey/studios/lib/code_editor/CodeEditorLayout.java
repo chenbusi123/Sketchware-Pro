@@ -207,7 +207,7 @@ public class CodeEditorLayout extends LinearLayout implements TextWatcher {
                     try {
                         prettifiedString = Lx.j(Lx.j(prettifiedString, false), false);
                     } catch (Exception e) {
-                        SketchwareUtil.toastError(context.getString(R.string.java_nested_parentheses_invalid));
+                        SketchwareUtil.toastError(context.getString(R.string.java_nested_parentheses_error));
                         break;
                     }
 

@@ -36,11 +36,11 @@ public class ItemBottomNavigationView extends BottomNavigationView implements It
         setFocusable(false);
         setClickable(false);
         var menu = getMenu();
-        menu.add(Menu.NONE, 1, Menu.NONE, "Home")
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.java_nav_home)
                 .setIcon(R.drawable.ic_mtrl_home);
-        menu.add(Menu.NONE, 2, Menu.NONE, "Chat")
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.java_nav_chat)
                 .setIcon(R.drawable.ic_mtrl_chat);
-        menu.add(Menu.NONE, 3, Menu.NONE, "Profile")
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.java_nav_profile)
                 .setIcon(R.drawable.ic_mtrl_profile);
     }
 

@@ -180,14 +180,13 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Settings").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_settings)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_settings).setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_settings)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
-        String title = Objects.requireNonNull(menuItem.getTitle()).toString();
-        if (title.equals("Settings")) {
+        if (menuItem.getItemId() == 1) {
             showBlockConfigurationDialog();
         } else {
             return false;
@@ -434,7 +433,7 @@ public class BlocksManager extends BaseAppCompatActivity {
     private void showPaletteDialog(boolean isEditing, Integer oldPosition, String oldName, String oldColor, Integer insertAtPosition) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setIcon(R.drawable.icon_style_white_96);
-        dialog.setTitle(!isEditing ? "Create a new palette" : "Edit palette");
+        dialog.setTitle(!isEditing ? R.string.java_create_new_palette : R.string.java_edit_palette);
 
         dialogBinding = DialogPaletteBinding.inflate(getLayoutInflater());
 

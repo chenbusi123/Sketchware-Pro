@@ -188,7 +188,7 @@ public class SketchwareUtil {
         builder.setTitle(Helper.getResString(R.string.common_error_an_error_occurred));
         builder.setIcon(R.drawable.ic_mtrl_warning);
         builder.setMessage(errorMessage);
-        builder.setPositiveButton(R.string.common_word_ok, null);
+        builder.setPositiveButton(R.string.java_okay, null);
         builder.show();
     }
 

@@ -214,19 +214,19 @@ public class WidgetsCreatorManager {
                 String widgetClass = Objects.requireNonNull(binding.addWidgetTo.getText()).toString().trim();
 
                 if (widgetTitle.isEmpty()) {
-                    binding.inputTitle.setError(String.format(Helper.getResString(R.string.var_is_required, "Widget title")));
+                    binding.inputTitle.setError(context.getString(R.string.var_is_required, context.getString(R.string.java_widget_title)));
                     return;
                 }
                 if (widgetName.isEmpty()) {
-                    binding.inputName.setError(String.format(Helper.getResString(R.string.var_is_required), "Widget class name"));
+                    binding.inputName.setError(context.getString(R.string.var_is_required, context.getString(R.string.java_widget_class_name)));
                     return;
                 }
                 if (widgetType.isEmpty()) {
-                    binding.inputType.setError(String.format(Helper.getResString(R.string.var_is_required), "Widget type"));
+                    binding.inputType.setError(context.getString(R.string.var_is_required, context.getString(R.string.java_widget_type)));
                     return;
                 }
                 if (widgetClass.isEmpty()) {
-                    binding.inputClass.setError(String.format(Helper.getResString(R.string.var_is_required), "Category"));
+                    binding.inputClass.setError(context.getString(R.string.var_is_required, context.getString(R.string.java_category)));
                     return;
                 }
 
