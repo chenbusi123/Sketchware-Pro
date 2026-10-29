@@ -501,32 +501,32 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
             if (!isFolder(position)) {
                 if (isActivityInManifest) {
-                    popupMenuMenu.add("Remove Activity from manifest");
+                    popupMenuMenu.add(Menu.NONE, 1, Menu.NONE, R.string.java_remove_activity_from_manifest);
                 } else if (!isServiceInManifest) {
-                    popupMenuMenu.add("Add as Activity to manifest");
+                    popupMenuMenu.add(Menu.NONE, 2, Menu.NONE, R.string.java_add_activity_to_manifest);
                 }
 
                 if (isServiceInManifest) {
-                    popupMenuMenu.add("Remove Service from manifest");
+                    popupMenuMenu.add(Menu.NONE, 3, Menu.NONE, R.string.java_remove_service_from_manifest);
                 } else if (!isActivityInManifest) {
-                    popupMenuMenu.add("Add as Service to manifest");
+                    popupMenuMenu.add(Menu.NONE, 4, Menu.NONE, R.string.java_add_service_to_manifest);
                 }
 
-                popupMenuMenu.add("Edit");
-                popupMenuMenu.add("Edit with...");
+                popupMenuMenu.add(Menu.NONE, 5, Menu.NONE, R.string.common_word_edit);
+                popupMenuMenu.add(Menu.NONE, 6, Menu.NONE, R.string.java_edit_with);
             }
 
-            popupMenuMenu.add("Rename");
-            popupMenuMenu.add("Delete");
+            popupMenuMenu.add(Menu.NONE, 7, Menu.NONE, R.string.assets_manager_rename);
+            popupMenuMenu.add(Menu.NONE, 8, Menu.NONE, R.string.common_word_delete);
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getTitle().toString()) {
-                    case "Add as Activity to manifest" -> {
+                switch (item.getItemId()) {
+                    case 2 -> {
                         frc.getJavaManifestList().add(getFullName(position));
                         FileUtil.writeFile(fpu.getManifestJava(sc_id), new Gson().toJson(frc.listJavaManifest));
                         SketchwareUtil.toast(getString(R.string.java_manifest_activity_added, getFileNameWoExt(position)));
                     }
-                    case "Remove Activity from manifest" -> {
+                    case 1 -> {
                         if (frc.getJavaManifestList().remove(getFullName(position))) {
                             FileUtil.writeFile(fpu.getManifestJava(sc_id), new Gson().toJson(frc.listJavaManifest));
                             SketchwareUtil.toast(getString(R.string.java_manifest_activity_removed, getFileNameWoExt(position)));
@@ -534,12 +534,12 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
                             SketchwareUtil.toast(getString(R.string.java_manifest_activity_not_defined));
                         }
                     }
-                    case "Add as Service to manifest" -> {
+                    case 4 -> {
                         frc.getServiceManifestList().add(getFullName(position));
                         FileUtil.writeFile(fpu.getManifestService(sc_id), new Gson().toJson(frc.listServiceManifest));
                         SketchwareUtil.toast(getString(R.string.java_manifest_service_added, getFileNameWoExt(position)));
                     }
-                    case "Remove Service from manifest" -> {
+                    case 3 -> {
                         if (frc.getServiceManifestList().remove(getFullName(position))) {
                             FileUtil.writeFile(fpu.getManifestService(sc_id), new Gson().toJson(frc.listServiceManifest));
                             SketchwareUtil.toast(getString(R.string.java_manifest_service_removed, getFileNameWoExt(position)));
@@ -547,14 +547,14 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
                             SketchwareUtil.toast(getString(R.string.java_manifest_service_not_defined));
                         }
                     }
-                    case "Edit" -> goEditFile(position);
-                    case "Edit with..." -> {
+                    case 5 -> goEditFile(position);
+                    case 6 -> {
                         Intent launchIntent = new Intent(Intent.ACTION_VIEW);
                         launchIntent.setDataAndType(Uri.fromFile(new File(getItem(position))), "text/plain");
                         startActivity(launchIntent);
                     }
-                    case "Rename" -> showRenameDialog(position);
-                    case "Delete" -> showDeleteDialog(position);
+                    case 7 -> showRenameDialog(position);
+                    case 8 -> showDeleteDialog(position);
                     default -> {
                         return false;
                     }

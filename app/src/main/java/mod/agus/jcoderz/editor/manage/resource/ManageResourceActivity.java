@@ -412,8 +412,8 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
                 popupMenu.inflate(R.menu.popup_menu_double);
                 popupMenu.getMenu().getItem(0).setVisible(false);
                 popupMenu.setOnMenuItemClickListener(item -> {
-                    switch (item.getTitle().toString()) {
-                        case "Edit with..." -> {
+                    int itemId = item.getItemId();
+                    if (itemId == R.id.edit_with) {
                             if (frc.listFileResource.get(position).endsWith("xml")) {
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
                                 intent.setDataAndType(Uri.fromFile(new File(frc.listFileResource.get(position))), "text/plain");
@@ -421,13 +421,14 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
                             } else {
                                 SketchwareUtil.toast(getString(R.string.java_only_xml_editable));
                             }
-                        }
-                        case "Edit" -> goEdit2(position);
-                        case "Delete" -> showDeleteDialog(position);
-                        case "Rename" -> showRenameDialog(frc.listFileResource.get(position));
-                        default -> {
-                            return false;
-                        }
+                    } else if (itemId == R.id.edit) {
+                        goEdit2(position);
+                    } else if (itemId == R.id.delete) {
+                        showDeleteDialog(position);
+                    } else if (itemId == R.id.rename) {
+                        showRenameDialog(frc.listFileResource.get(position));
+                    } else {
+                        return false;
                     }
                     return true;
                 });
@@ -437,7 +438,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
             binding.getRoot().setOnLongClickListener(v -> {
                 if (FileUtil.isDirectory(frc.listFileResource.get(position))) {
                     PopupMenu popupMenu = new PopupMenu(ManageResourceActivity.this, binding.more);
-                    popupMenu.getMenu().add("Delete");
+                    popupMenu.getMenu().add(R.string.common_word_delete);
                     popupMenu.setOnMenuItemClickListener(item -> {
                         showDeleteDialog(position);
                         return true;

@@ -336,16 +336,14 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
                 menu.getMenu().getItem(2).setVisible(false);
 
                 menu.setOnMenuItemClickListener(item -> {
-                    String title = item.getTitle().toString();
-                    switch (title) {
-                        case "Delete" -> {
-                            FileUtil.deleteFile(frc.listFileNativeLibs.get(position));
-                            handleAdapter(nativeLibrariesPath);
-                        }
-                        case "Rename" -> showRenameDialog(frc.listFileNativeLibs.get(position));
-                        default -> {
-                            return false;
-                        }
+                    int itemId = item.getItemId();
+                    if (itemId == R.id.delete) {
+                        FileUtil.deleteFile(frc.listFileNativeLibs.get(position));
+                        handleAdapter(nativeLibrariesPath);
+                    } else if (itemId == R.id.rename) {
+                        showRenameDialog(frc.listFileNativeLibs.get(position));
+                    } else {
+                        return false;
                     }
 
                     return true;
@@ -356,7 +354,7 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
             binding.getRoot().setOnLongClickListener(view -> {
                 if (FileUtil.isDirectory(frc.listFileNativeLibs.get(position))) {
                     PopupMenu menu = new PopupMenu(ManageNativelibsActivity.this, view);
-                    menu.getMenu().add("Delete");
+                    menu.getMenu().add(R.string.common_word_delete);
                     menu.setOnMenuItemClickListener(item -> {
                         FileUtil.deleteFile(frc.listFileNativeLibs.get(position));
                         handleAdapter(nativeLibrariesPath);

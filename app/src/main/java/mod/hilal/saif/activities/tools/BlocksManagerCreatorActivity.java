@@ -191,12 +191,12 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         binding.cancel.setOnClickListener(Helper.getBackPressedClickListener(this));
         binding.save.setOnClickListener(v -> {
             if (!PropertiesUtil.isHexColor(Helper.getText(binding.colour))) {
-                SketchwareUtil.showMessage(getApplicationContext(), "Invalid hex color");
+                SketchwareUtil.showMessage(getApplicationContext(), getString(R.string.java_hex_color_short_invalid));
                 return;
             }
             Matcher matcher = PARAM_PATTERN.matcher(Helper.getText(binding.spec));
             if (matcher.find()) {
-                SketchwareUtil.showMessage(getApplicationContext(), "Invalid block params");
+                SketchwareUtil.showMessage(getApplicationContext(), getString(R.string.java_invalid_block_params));
                 return;
             }
             if (Helper.getText(binding.type).isEmpty()) {

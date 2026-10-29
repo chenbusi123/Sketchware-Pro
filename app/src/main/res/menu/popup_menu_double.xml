@@ -1,11 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/add"
-        android:title="Add to AndroidManifest" />
+        android:title="@string/java_add_to_android_manifest" />
     <item
         android:id="@+id/edit"
         android:title="@string/common_word_edit" />
-    <item android:title="Edit with..." />
+    <item
+        android:id="@+id/edit_with"
+        android:title="@string/java_edit_with" />
     <item
         android:id="@+id/rename"
         android:title="@string/assets_manager_rename" />

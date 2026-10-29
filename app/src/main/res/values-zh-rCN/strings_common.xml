@@ -691,4 +691,23 @@
     <string name="java_nav_home">首页</string>
     <string name="java_nav_chat">聊天</string>
     <string name="java_nav_profile">个人资料</string>
+    <string name="java_font_size">字体大小</string>
+    <string name="java_complete_brackets">自动补全括号</string>
+    <string name="java_exit_confirmation">退出时确认</string>
+    <string name="java_insert_above">在上方插入</string>
+    <string name="java_move_to_palette">移至积木面板</string>
+    <string name="java_clear_all_logs">清除所有日志</string>
+    <string name="java_open_in_editor">在编辑器中打开</string>
+    <string name="java_import_block_selector_menus">导入积木选择器菜单</string>
+    <string name="java_export_all_block_selector_menus">导出所有积木选择器菜单</string>
+    <string name="java_invalid_block_params">积木参数无效</string>
+    <string name="java_add_to_android_manifest">添加到 AndroidManifest</string>
+    <string name="java_edit_with">使用其他应用编辑...</string>
+    <string name="java_delete_selected_local_libraries">删除选中的本地库</string>
+    <string name="java_add_activity_to_manifest">作为 Activity 添加到 Manifest</string>
+    <string name="java_remove_activity_from_manifest">从 Manifest 移除 Activity</string>
+    <string name="java_add_service_to_manifest">作为 Service 添加到 Manifest</string>
+    <string name="java_remove_service_from_manifest">从 Manifest 移除 Service</string>
+    <string name="java_wrap_text">文本换行</string>
+    <string name="java_monospaced_font">等宽字体</string>
 </resources>

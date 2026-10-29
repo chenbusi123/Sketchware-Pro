@@ -308,15 +308,15 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         if (palette == -1) {
             PopupMenu popupMenu = new PopupMenu(this, view);
             Menu menu = popupMenu.getMenu();
-            menu.add("Delete permanently");
-            menu.add("Restore");
+            menu.add(Menu.NONE, 1, Menu.NONE, R.string.java_delete_permanently);
+            menu.add(Menu.NONE, 2, Menu.NONE, R.string.common_word_restore);
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getTitle().toString()) {
-                    case "Delete permanently":
+                switch (item.getItemId()) {
+                    case 1:
                         _deleteBlock(position);
                         break;
 
-                    case "Restore":
+                    case 2:
                         _changePallette(position);
                         break;
 
@@ -330,17 +330,17 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         }
         PopupMenu popupMenu = new PopupMenu(this, view);
         Menu menu = popupMenu.getMenu();
-        menu.add("Insert above");
-        menu.add("Delete");
-        menu.add("Duplicate");
-        menu.add("Move to palette");
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.java_insert_above);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.common_word_delete);
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.common_word_duplicate);
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.java_move_to_palette);
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getTitle().toString()) {
-                case "Duplicate":
+            switch (item.getItemId()) {
+                case 3:
                     _duplicateBlock(position);
                     break;
 
-                case "Insert above":
+                case 1:
                     Object paletteColor = pallet_list.get(palette - 9).get("color");
                     if (paletteColor instanceof String) {
                         Intent intent = new Intent(getApplicationContext(), BlocksManagerCreatorActivity.class);
@@ -354,11 +354,11 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                     }
                     break;
 
-                case "Move to palette":
+                case 4:
                     _changePallette(position);
                     break;
 
-                case "Delete":
+                case 2:
                     new MaterialAlertDialogBuilder(this)
                             .setTitle(R.string.java_delete_block)
                             .setMessage(R.string.java_confirm_delete_block)

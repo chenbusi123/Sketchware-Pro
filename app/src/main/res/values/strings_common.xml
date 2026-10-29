@@ -566,7 +566,7 @@
     <string name="java_library_in_use_warning">The library “%1$s” is already used in your project. Removing it may break the project.\nContinue removing it?</string>
     <string name="java_library_downloaded">Library downloaded successfully</string>
     <string name="java_crop_unsupported">Your device doesn\'t support the crop action!</string>
-    <string name="java_configure_firebase_first">Configure Firebase first by importing google-services.json or entering the project details manually.</string>
+    <string name="java_configure_firebase_first">Configure Firebase settings first, either by importing google-services.json, or by manually entering the project\'s details.</string>
     <string name="java_local_library_dex_path_invalid">Invalid DEX file path for enabled local library #%1$d</string>
     <string name="java_local_library_name_invalid">Invalid name for enabled local library #%1$d</string>
     <string name="java_component_read_failed_title">Couldn’t get %1$s</string>
@@ -638,8 +638,8 @@
     <string name="java_modifier_invalid">Invalid modifier: %1$s</string>
     <string name="java_modifier_duplicate">Duplicate modifier: %1$s</string>
     <string name="java_access_modifier_multiple">Access modifier can only set one of public / protected / private</string>
-    <string name="java_spaces_not_allowed">Spaces aren’t allowed because they can cause crashes</string>
-    <string name="java_version_postfix_chars">Use only letters (a-zA-Z), numbers, and the underscore (_)</string>
+    <string name="java_spaces_not_allowed">Spaces aren\'t allowed to prevent crashes</string>
+    <string name="java_version_postfix_chars">Only use letters (a-zA-Z), numbers and Special characters (_)</string>
     <string name="java_type_start_letter">Variable data type must start with a letter</string>
     <string name="java_angle_bracket_unmatched">Angle bracket not matched</string>
     <string name="java_box_bracket_unmatched">Box bracket not matched</string>
@@ -658,9 +658,9 @@
     <string name="java_pref_app_settings">App settings</string>
     <string name="java_pref_app_settings_desc">Change general app settings</string>
     <string name="java_pref_working_directory">Open working directory</string>
-    <string name="java_pref_working_directory_desc">Open the Sketchware Pro directory and edit its files</string>
+    <string name="java_pref_working_directory_desc">Open Sketchware Pro\'s directory and edit files in it</string>
     <string name="java_pref_sign_apk">Sign an APK file with testkey</string>
-    <string name="java_pref_sign_apk_desc">Sign an existing APK with testkey and signature schemes up to V4</string>
+    <string name="java_pref_sign_apk_desc">Sign an already existing APK file with testkey and signature schemes up to V4</string>
     <string name="java_pref_system_settings_desc">Auto-save and vibrations</string>
     <string name="java_root_access_failed">Couldn\'t acquire root access</string>
     <string name="java_show_compile_log">Show compile log</string>
@@ -724,4 +724,23 @@
     <string name="java_nav_home">Home</string>
     <string name="java_nav_chat">Chat</string>
     <string name="java_nav_profile">Profile</string>
+    <string name="java_font_size">Font size</string>
+    <string name="java_complete_brackets">Complete brackets</string>
+    <string name="java_exit_confirmation">Exit confirmation</string>
+    <string name="java_insert_above">Insert above</string>
+    <string name="java_move_to_palette">Move to palette</string>
+    <string name="java_clear_all_logs">Clear all logs</string>
+    <string name="java_open_in_editor">Open in editor</string>
+    <string name="java_import_block_selector_menus">Import block selector menus</string>
+    <string name="java_export_all_block_selector_menus">Export all block selector menus</string>
+    <string name="java_invalid_block_params">Invalid block params</string>
+    <string name="java_add_to_android_manifest">Add to AndroidManifest</string>
+    <string name="java_edit_with">Edit with...</string>
+    <string name="java_delete_selected_local_libraries">Delete selected local libraries</string>
+    <string name="java_add_activity_to_manifest">Add as Activity to manifest</string>
+    <string name="java_remove_activity_from_manifest">Remove Activity from manifest</string>
+    <string name="java_add_service_to_manifest">Add as Service to manifest</string>
+    <string name="java_remove_service_from_manifest">Remove Service from manifest</string>
+    <string name="java_wrap_text">Wrap text</string>
+    <string name="java_monospaced_font">Monospaced font</string>
 </resources>
