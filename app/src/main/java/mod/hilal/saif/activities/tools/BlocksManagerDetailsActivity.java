@@ -568,7 +568,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 spec.setHint("");
             } else {
                 name.setText("");
-                name.setHint("(Invalid block name entry)");
+                name.setHint(R.string.java_invalid_block_name_entry);
             }
 
             Object blockSpec = block.get("spec");
@@ -577,7 +577,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 spec.setHint("");
             } else {
                 spec.setText("");
-                spec.setHint("(Invalid block spec entry)");
+                spec.setHint(R.string.java_invalid_block_spec_entry);
             }
 
             Object blockType = block.get("type");

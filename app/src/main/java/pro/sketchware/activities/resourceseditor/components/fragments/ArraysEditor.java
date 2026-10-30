@@ -244,7 +244,7 @@ public class ArraysEditor extends Fragment {
         dialog.setContentView(binding.getRoot());
         dialog.show();
 
-        binding.title.setText(array.getArrayName() + " attributes");
+        binding.title.setText(getString(R.string.java_named_attributes, array.getArrayName()));
 
         attributesAdapter = new PropertyInputItem.AttributesAdapter();
         attributesAdapter.setOnItemClickListener(

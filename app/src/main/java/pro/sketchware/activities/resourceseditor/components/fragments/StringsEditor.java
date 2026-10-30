@@ -155,7 +155,7 @@ public class StringsEditor extends Fragment {
             }
 
             if (stringsEditorManager.isXmlStringsExist(listmap, key)) {
-                SketchwareUtil.toastError("\"" + key + "\" is already exist");
+                SketchwareUtil.toastError(getString(R.string.java_quoted_item_exists, key));
                 return;
             }
             addString(key, value, Objects.requireNonNull(binding.stringHeaderInput.getText()).toString().trim());

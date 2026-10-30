@@ -743,4 +743,13 @@
     <string name="java_remove_service_from_manifest">Remove Service from manifest</string>
     <string name="java_wrap_text">Wrap text</string>
     <string name="java_monospaced_font">Monospaced font</string>
+    <string name="java_indent_sides">left: %1$d, top: %2$d, right: %3$d, bottom: %4$d</string>
+    <string name="java_property_on_all_sides">%1$s on all sides</string>
+    <string name="java_quoted_item_exists">\"%1$s\" is already exist</string>
+    <string name="java_named_attributes">%1$s attributes</string>
+    <string name="java_image_saved_to">Saved image to %1$s!</string>
+    <string name="java_invalid_code_block_data">(Invalid code block data)</string>
+    <string name="java_invalid_block_name_entry">(Invalid block name entry)</string>
+    <string name="java_invalid_block_spec_entry">(Invalid block spec entry)</string>
+    <string name="java_more_image_count">+ %1$d more</string>
 </resources>

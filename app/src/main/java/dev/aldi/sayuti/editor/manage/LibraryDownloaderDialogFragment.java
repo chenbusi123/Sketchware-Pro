@@ -167,6 +167,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
     }
 
     private void startDownloadProcess(String group, String artifact, String version) {
+        Context applicationContext = requireContext().getApplicationContext();
         binding.dependencyInputLayout.setErrorEnabled(false);
 
         binding.dependencyInfo.setVisibility(View.GONE);
@@ -220,7 +221,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onVersionNotFound(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError(getString(R.string.java_version_unavailable));
+                        item.setError(applicationContext.getString(R.string.java_version_unavailable));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -239,7 +240,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onDependenciesNotFound(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError(getString(R.string.java_dependencies_not_found));
+                        item.setError(applicationContext.getString(R.string.java_dependencies_not_found));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -248,7 +249,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onInvalidScope(@NonNull Artifact dep, @NonNull String scope) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError(getString(R.string.java_scope_invalid, scope));
+                        item.setError(applicationContext.getString(R.string.java_scope_invalid, scope));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -257,7 +258,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void invalidPackaging(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError(getString(R.string.java_packaging_invalid));
+                        item.setError(applicationContext.getString(R.string.java_packaging_invalid));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -307,7 +308,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void dexingFailed(@NonNull Artifact dependency, @NonNull Exception e) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dependency);
-                        item.setError(getString(R.string.java_dexing_failed, e.getMessage()));
+                        item.setError(applicationContext.getString(R.string.java_dexing_failed, e.getMessage()));
                         dependencyAdapter.updateDependency(item);
                         setDownloadState(false);
                         SketchwareUtil.showAnErrorOccurredDialog(getActivity(),
@@ -318,7 +319,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 @Override
                 public void onTaskCompleted(@NonNull List<String> dependencies) {
                     handler.post(() -> {
-                        SketchwareUtil.toast(requireContext().getString(R.string.java_library_downloaded));
+                        SketchwareUtil.toast(applicationContext.getString(R.string.java_library_downloaded));
                         if (!notAssociatedWithProject) {
                             var fileContent = FileUtil.readFile(localLibFile);
                             var enabledLibs = gson.fromJson(fileContent, Helper.TYPE_MAP_LIST);

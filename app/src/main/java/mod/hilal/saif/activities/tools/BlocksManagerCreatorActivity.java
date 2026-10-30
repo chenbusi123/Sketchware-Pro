@@ -429,7 +429,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (codeObject instanceof String) {
             binding.code.setText((String) codeObject);
         } else {
-            binding.code.setHint("(Invalid code block data)");
+            binding.code.setHint(R.string.java_invalid_code_block_data);
         }
     }
 

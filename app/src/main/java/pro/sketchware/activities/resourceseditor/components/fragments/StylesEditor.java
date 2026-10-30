@@ -144,7 +144,7 @@ public class StylesEditor extends Fragment {
             }
 
             if (stylesEditorManager.isStyleExist(stylesList, styleName)) {
-                SketchwareUtil.toastError("\"" + styleName + "\" is already exist");
+                SketchwareUtil.toastError(getString(R.string.java_quoted_item_exists, styleName));
                 return;
             }
 
@@ -221,7 +221,7 @@ public class StylesEditor extends Fragment {
         dialog.setContentView(binding.getRoot());
         dialog.show();
 
-        binding.title.setText(style.getStyleName() + " attributes");
+        binding.title.setText(getString(R.string.java_named_attributes, style.getStyleName()));
 
         attributesAdapter = new PropertyInputItem.AttributesAdapter();
         attributesAdapter.setOnItemClickListener(

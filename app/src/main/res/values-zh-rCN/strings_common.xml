@@ -710,4 +710,13 @@
     <string name="java_remove_service_from_manifest">从 Manifest 移除 Service</string>
     <string name="java_wrap_text">文本换行</string>
     <string name="java_monospaced_font">等宽字体</string>
+    <string name="java_indent_sides">左：%1$d，上：%2$d，右：%3$d，下：%4$d</string>
+    <string name="java_property_on_all_sides">四边%1$s</string>
+    <string name="java_quoted_item_exists">\"%1$s\"已存在</string>
+    <string name="java_named_attributes">%1$s 的属性</string>
+    <string name="java_image_saved_to">图片已保存至 %1$s！</string>
+    <string name="java_invalid_code_block_data">（积木代码数据无效）</string>
+    <string name="java_invalid_block_name_entry">（积木名称条目无效）</string>
+    <string name="java_invalid_block_spec_entry">（积木描述条目无效）</string>
+    <string name="java_more_image_count">+ %1$d 张</string>
 </resources>

@@ -180,7 +180,7 @@ public class ShowBlockCollectionActivity extends BaseAppCompatActivity implement
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem saveImageItem = menu.add(0, 12, 0, "Save image");
+        MenuItem saveImageItem = menu.add(0, 12, 0, R.string.s1);
         saveImageItem.setIcon(R.drawable.full_image_48);
         saveImageItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
@@ -191,7 +191,7 @@ public class ShowBlockCollectionActivity extends BaseAppCompatActivity implement
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == 12) {
             if (ImageFactory.saveBitmap(binding.editor.getChildAt(0), blockName).exists()) {
-                SketchwareUtil.toast("Saved image to /Internal storage/sketchware/saved_block/" + blockName + ".png!");
+                SketchwareUtil.toast(getString(R.string.java_image_saved_to, "/Internal storage/sketchware/saved_block/" + blockName + ".png"));
             } else {
                 SketchwareUtil.toastError(getString(R.string.image_save_failed));
             }

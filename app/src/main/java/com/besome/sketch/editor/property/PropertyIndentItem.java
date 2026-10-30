@@ -135,7 +135,7 @@ public class PropertyIndentItem extends RelativeLayout implements View.OnClickLi
         k = top;
         l = right;
         m = bottom;
-        tvValue.setText("left: " + j + ", top: " + k + ", right: " + l + ", bottom: " + m);
+        tvValue.setText(getContext().getString(R.string.java_indent_sides, j, k, l, m));
     }
 
     private void showDialog() {
@@ -149,7 +149,7 @@ public class PropertyIndentItem extends RelativeLayout implements View.OnClickLi
         View view = popupBinding.getRoot();
 
         popupBinding.tiAll.setHint(String.format(Helper.getResString(R.string.property_enter_value), propertyType.toLowerCase()));
-        popupBinding.chkPtyAll.setText(String.format("%s on all sides", propertyType));
+        popupBinding.chkPtyAll.setText(getContext().getString(R.string.java_property_on_all_sides, propertyType));
 
         MinMaxInputValidator ti_all = new MinMaxInputValidator(context, popupBinding.tiAll, 0, 999);
         MinMaxInputValidator ti_left = new MinMaxInputValidator(context, popupBinding.tiLeft, 0, 999);
