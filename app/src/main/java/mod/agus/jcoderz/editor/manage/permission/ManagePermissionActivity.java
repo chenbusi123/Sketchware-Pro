@@ -137,14 +137,14 @@ public class ManagePermissionActivity extends BaseAppCompatActivity {
 
     private void showResetDialog() {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Reset permissions")
-                .setMessage("Are you sure you want to reset all permissions?")
-                .setPositiveButton("Reset", (dialog, which) -> {
+                .setTitle(pro.sketchware.R.string.common_word_reset_permissions)
+                .setMessage(R.string.java_reset_permissions_confirm)
+                .setPositiveButton(pro.sketchware.R.string.program_information_reset_system_title, (dialog, which) -> {
                     FileUtil.writeFile(new FilePathUtil().getPathPermission(numProj), "[]");
                     frc = new FileResConfig(numProj);
                     loadAndSortData();
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(pro.sketchware.R.string.cancel, null)
                 .show();
     }
 

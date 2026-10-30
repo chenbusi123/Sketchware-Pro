@@ -13,6 +13,7 @@ import com.besome.sketch.editor.view.ItemView;
 import com.google.android.material.tabs.TabLayout;
 
 import a.a.a.wB;
+import pro.sketchware.R;
 
 public class ItemTabLayout extends TabLayout implements ItemView {
 
@@ -33,9 +34,9 @@ public class ItemTabLayout extends TabLayout implements ItemView {
         setDrawingCacheEnabled(true);
         setClickable(false);
         setFocusable(false);
-        addTab(newTab().setText("Tab 1"), true);
-        addTab(newTab().setText("Tab 2"));
-        addTab(newTab().setText("Tab 3"));
+        addTab(newTab().setText(R.string.common_word_tab_1), true);
+        addTab(newTab().setText(R.string.common_word_tab_2));
+        addTab(newTab().setText(R.string.common_word_tab_3));
     }
 
     @Override

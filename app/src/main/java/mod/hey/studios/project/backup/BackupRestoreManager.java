@@ -28,7 +28,6 @@ import dev.pranav.filepicker.FilePickerCallback;
 import dev.pranav.filepicker.FilePickerDialogFragment;
 import dev.pranav.filepicker.FilePickerOptions;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
 import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
 import pro.sketchware.databinding.ProgressMsgBoxBinding;
 import pro.sketchware.utility.FileUtil;
@@ -69,7 +68,7 @@ public class BackupRestoreManager {
 
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(act);
         dialog.setIcon(R.drawable.ic_backup);
-        dialog.setTitle("Backup Options");
+        dialog.setTitle(pro.sketchware.R.string.common_word_backup_options);
 
         LinearLayout checkboxContainer = new LinearLayout(act);
         checkboxContainer.setOrientation(LinearLayout.VERTICAL);
@@ -101,7 +100,7 @@ public class BackupRestoreManager {
 
         CheckBox includeLocalLibraries = new CheckBox(act);
         includeLocalLibraries.setTag(localLibrariesTag);
-        includeLocalLibraries.setText("Include used Local libraries");
+        includeLocalLibraries.setText(R.string.java_include_local_libraries);
         includeLocalLibraries.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -110,7 +109,7 @@ public class BackupRestoreManager {
 
         CheckBox includeUsedCustomBlocks = new CheckBox(act);
         includeUsedCustomBlocks.setTag(customBlocksTag);
-        includeUsedCustomBlocks.setText("Include used Custom Blocks");
+        includeUsedCustomBlocks.setText(R.string.java_include_custom_blocks);
         includeUsedCustomBlocks.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -118,7 +117,7 @@ public class BackupRestoreManager {
         checkboxContainer.addView(includeUsedCustomBlocks);
 
         dialog.setView(checkboxContainer);
-        dialog.setPositiveButton("Back up", (v, which) -> {
+        dialog.setPositiveButton(R.string.java_back_up, (v, which) -> {
             v.dismiss();
             doBackup(sc_id, project_name);
         });
@@ -137,7 +136,7 @@ public class BackupRestoreManager {
         FilePickerOptions options = new FilePickerOptions();
         options.setMultipleSelection(true);
         options.setExtensions(new String[]{BackupFactory.EXTENSION});
-        options.setTitle("Select backups to restore (" + BackupFactory.EXTENSION + ")");
+        options.setTitle(act.getString(R.string.java_select_backups, BackupFactory.EXTENSION));
 
         FilePickerCallback callback = new FilePickerCallback() {
             @Override
@@ -160,8 +159,9 @@ public class BackupRestoreManager {
                                         .setTitle(R.string.common_word_warning)
                                         .setMessage(getRestoreIntegratedLocalLibrariesMessage(restoringMultipleBackups, currentIndex, files.size(),
                                                 FileUtil.getFileNameNoExtension(backupFilePath)))
-                                        .setPositiveButton("Copy", (dialog, which) -> doRestore(backupFilePath, true))
-                                        .setNegativeButton("Don't copy", (dialog, which) -> doRestore(backupFilePath, false))
+                                        .setPositiveButton(pro.sketchware.R.string.common_word_copy, (dialog, which) -> doRestore(backupFilePath, true))
+                                        .setNegativeButton(R.string.java_do_not_copy,
+                                                (dialog, which) -> doRestore(backupFilePath, false))
                                         .setNeutralButton(R.string.common_word_cancel, null)
                                         .show();
                             } else {
@@ -200,9 +200,9 @@ public class BackupRestoreManager {
         @Override
         protected void onPreExecute() {
             ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(LayoutInflater.from(activityWeakReference.get()));
-            loadingDialogBinding.tvProgress.setText("Creating backup...");
+            loadingDialogBinding.tvProgress.setText(R.string.java_creating_backup);
             dlg = new MaterialAlertDialogBuilder(activityWeakReference.get())
-                    .setTitle("Please wait")
+                    .setTitle(pro.sketchware.R.string.common_word_please_wait)
                     .setCancelable(false)
                     .setView(loadingDialogBinding.getRoot())
                     .create();
@@ -225,9 +225,11 @@ public class BackupRestoreManager {
             dlg.dismiss();
 
             if (bm.getOutFile() != null) {
-                SketchwareUtil.toast("Successfully created backup to: " + bm.getOutFile().getAbsolutePath());
+                SketchwareUtil.toast(activityWeakReference.get().getString(R.string.java_backup_created_to,
+                        bm.getOutFile().getAbsolutePath()));
             } else {
-                SketchwareUtil.toastError("Error: " + bm.error, Toast.LENGTH_LONG);
+                SketchwareUtil.toastError(activityWeakReference.get().getString(
+                        R.string.java_error_value, bm.error), Toast.LENGTH_LONG);
             }
         }
     }
@@ -252,9 +254,9 @@ public class BackupRestoreManager {
         @Override
         protected void onPreExecute() {
             ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(LayoutInflater.from(activityWeakReference.get()));
-            loadingDialogBinding.tvProgress.setText("Restoring...");
+            loadingDialogBinding.tvProgress.setText(R.string.java_restoring);
             dlg = new MaterialAlertDialogBuilder(activityWeakReference.get())
-                    .setTitle("Please wait")
+                    .setTitle(pro.sketchware.R.string.common_word_please_wait)
                     .setCancelable(false)
                     .setView(loadingDialogBinding.getRoot())
                     .create();
@@ -281,12 +283,14 @@ public class BackupRestoreManager {
             dlg.dismiss();
 
             if (!bm.isRestoreSuccess() || error) {
-                SketchwareUtil.toastError("Couldn't restore: " + bm.error, Toast.LENGTH_LONG);
+                SketchwareUtil.toastError(activityWeakReference.get().getString(
+                        R.string.java_restore_failed, bm.error), Toast.LENGTH_LONG);
             } else if (projectsFragment != null) {
                 projectsFragment.refreshProjectsList();
-                SketchwareUtil.toast("Restored successfully");
+                SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_restored_successfully));
             } else {
-                SketchwareUtil.toast("Restored successfully. Refresh to see the project", Toast.LENGTH_LONG);
+                SketchwareUtil.toast(activityWeakReference.get().getString(
+                        R.string.java_restore_refresh), Toast.LENGTH_LONG);
             }
         }
     }

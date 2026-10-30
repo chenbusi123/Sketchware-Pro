@@ -148,9 +148,9 @@ public class EventsManagerFragment extends qA {
         }
 
         var dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setTitle(existingListener == null ? "New Listener" : "Edit Listener")
+                .setTitle(existingListener == null ? R.string.java_new_listener : R.string.java_edit_listener)
                 .setView(listenerBinding.getRoot())
-                .setPositiveButton("Save", (di, i) -> {
+                .setPositiveButton(pro.sketchware.R.string.myprojects_settings_button_save, (di, i) -> {
                     String listenerName = Helper.getText(listenerBinding.listenerName);
                     if (!listenerName.isEmpty()) {
                         HashMap<String, Object> hashMap = existingListener != null ? existingListener : new HashMap<>();
@@ -168,10 +168,10 @@ public class EventsManagerFragment extends qA {
                         addListenerItem();
                         di.dismiss();
                     } else {
-                        SketchwareUtil.toastError("Invalid name!");
+                        SketchwareUtil.toastError(getString(R.string.java_invalid_name));
                     }
                 })
-                .setNegativeButton("Cancel", (di, i) -> di.dismiss()).create();
+                .setNegativeButton(pro.sketchware.R.string.cancel, (di, i) -> di.dismiss()).create();
         dialog.show();
     }
 
@@ -187,23 +187,23 @@ public class EventsManagerFragment extends qA {
 
     private void showImportEventsDialog() {
         FilePickerOptions options = new FilePickerOptions();
-        options.setTitle("Select a .txt file");
+        options.setTitle(getString(R.string.java_select_txt_file));
         options.setExtensions(new String[]{"txt"});
 
         FilePickerCallback callback = new FilePickerCallback() {
             @Override
             public void onFileSelected(File file) {
                 if (FileUtil.readFile(file.getAbsolutePath()).isEmpty()) {
-                    SketchwareUtil.toastError("The selected file is empty!");
+                    SketchwareUtil.toastError(getString(R.string.java_selected_file_empty));
                 } else if (FileUtil.readFile(file.getAbsolutePath()).equals("[]")) {
-                    SketchwareUtil.toastError("The selected file is empty!");
+                    SketchwareUtil.toastError(getString(R.string.java_selected_file_empty));
                 } else {
                     try {
                         String[] split = FileUtil.readFile(file.getAbsolutePath()).split("\n");
                         importEvents(new Gson().fromJson(split[0], Helper.TYPE_MAP_LIST),
                                 new Gson().fromJson(split[1], Helper.TYPE_MAP_LIST));
                     } catch (Exception e) {
-                        SketchwareUtil.toastError("Invalid file");
+                        SketchwareUtil.toastError(getString(R.string.java_invalid_file));
                     }
                 }
             }
@@ -224,7 +224,7 @@ public class EventsManagerFragment extends qA {
         listMap.addAll(data);
         FileUtil.writeFile(EventsManagerConstants.LISTENERS_FILE.getAbsolutePath(), new Gson().toJson(listMap));
         refreshList();
-        SketchwareUtil.toast("Successfully imported events");
+        SketchwareUtil.toast(getString(R.string.java_events_imported));
     }
 
     private void exportListener(int p) {
@@ -242,8 +242,8 @@ public class EventsManagerFragment extends qA {
             }
         }
         FileUtil.writeFile(concat + ex.get(0).get("name").toString() + ".txt", new Gson().toJson(ex) + "\n" + new Gson().toJson(ex2));
-        SketchwareUtil.toast("Successfully exported event to:\n" +
-                "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
+        SketchwareUtil.toast(getString(R.string.java_event_exported_to,
+                EventsManagerConstants.EVENT_EXPORT_LOCATION.getAbsolutePath()), Toast.LENGTH_LONG);
     }
 
     private void exportAllEvents() {
@@ -253,8 +253,8 @@ public class EventsManagerFragment extends qA {
         }
         FileUtil.writeFile(new File(EventsManagerConstants.EVENT_EXPORT_LOCATION, "All_Events.txt").getAbsolutePath(),
                 new Gson().toJson(listMap) + "\n" + new Gson().toJson(events));
-        SketchwareUtil.toast("Successfully exported events to:\n" +
-                "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
+        SketchwareUtil.toast(getString(R.string.java_events_exported_to,
+                EventsManagerConstants.EVENT_EXPORT_LOCATION.getAbsolutePath()), Toast.LENGTH_LONG);
     }
 
     private void addListenerItem() {
@@ -326,14 +326,14 @@ public class EventsManagerFragment extends qA {
                                     break;
                                 case 2:
                                     new MaterialAlertDialogBuilder(context)
-                                            .setTitle("Delete listener")
-                                            .setMessage("Are you sure you want to delete this item?")
-                                            .setPositiveButton("Yes", (di, i) -> {
+                                            .setTitle(pro.sketchware.R.string.common_word_delete_listener)
+                                            .setMessage(R.string.java_confirm_delete_list_item)
+                                            .setPositiveButton(pro.sketchware.R.string.common_word_yes, (di, i) -> {
                                                 deleteRelatedEvents(name);
                                                 deleteItem(position);
                                                 di.dismiss();
                                             })
-                                            .setNegativeButton("No", (di, i) -> di.dismiss())
+                                            .setNegativeButton(pro.sketchware.R.string.common_word_no, (di, i) -> di.dismiss())
                                             .show();
                                     break;
                             }

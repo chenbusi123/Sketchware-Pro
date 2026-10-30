@@ -571,7 +571,7 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
         tvToolbar.setPadding((int) (dip * 16f), 0, 0, 0);
         tvToolbar.setGravity(Gravity.CENTER_VERTICAL);
         tvToolbar.setTextSize(15f);
-        tvToolbar.setText("Toolbar");
+        tvToolbar.setText(R.string.common_word_toolbar);
         tvToolbar.setTypeface(null, Typeface.BOLD);
         toolbar.addView(tvToolbar);
         shape.addView(toolbar);
@@ -814,10 +814,10 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
     private void b(boolean z, boolean isCustomWidget) {
         if (isCustomWidget) {
             deleteIcon.setImageDrawable(AppCompatResources.getDrawable(getContext(), R.drawable.ic_mtrl_edit));
-            deleteText.setText("Drag here to see the Actions");
+            deleteText.setText(R.string.view_editor_drag_to_actions);
         } else if (z) {
             deleteIcon.setImageDrawable(AppCompatResources.getDrawable(getContext(), R.drawable.ic_mtrl_delete));
-            deleteText.setText("Drag here to delete");
+            deleteText.setText(R.string.view_editor_drag_to_delete);
             setDeleteViewIconAndTextUi(false);
         }
         deleteView.bringToFront();
@@ -1081,10 +1081,10 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
         }
         if (isCustomWidget) {
             deleteIcon.setImageDrawable(AppCompatResources.getDrawable(getContext(), R.drawable.ic_mtrl_edit));
-            deleteText.setText(D ? "Release to see the actions" : "Drag here to see the Actions");
+            deleteText.setText(D ? R.string.view_editor_release_for_actions : R.string.view_editor_drag_to_actions);
         } else {
             deleteIcon.setImageDrawable(AppCompatResources.getDrawable(getContext(), R.drawable.ic_mtrl_delete));
-            deleteText.setText(D ? "Release to delete" : "Drag here to delete");
+            deleteText.setText(D ? R.string.view_editor_release_to_delete : R.string.view_editor_drag_to_delete);
         }
     }
 

@@ -117,8 +117,10 @@ public class StringsEditor extends Fragment {
     public void updateNoContentLayout() {
         if (listmap.isEmpty()) {
             binding.noContentLayout.setVisibility(View.VISIBLE);
-            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title), "Strings"));
-            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body), "string"));
+            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title),
+                    getString(R.string.java_resource_strings)));
+            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body),
+                    getString(R.string.java_resource_strings)));
         } else {
             binding.noContentLayout.setVisibility(View.GONE);
         }
@@ -127,7 +129,7 @@ public class StringsEditor extends Fragment {
     public void showAddStringDialog() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
         ViewStringEditorAddBinding binding = ViewStringEditorAddBinding.inflate(getLayoutInflater());
-        dialog.setTitle("Create new string");
+        dialog.setTitle(R.string.java_create_new_string);
         binding.stringKeyInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -143,17 +145,17 @@ public class StringsEditor extends Fragment {
                 binding.importantNote.setVisibility(s.toString().equals("app_name") ? View.VISIBLE : View.GONE);
             }
         });
-        dialog.setPositiveButton("Create", (d, which) -> {
+        dialog.setPositiveButton(pro.sketchware.R.string.myprojects_sign_apk_new_certificate_button_create, (d, which) -> {
             String key = Objects.requireNonNull(binding.stringKeyInput.getText()).toString();
             String value = Objects.requireNonNull(binding.stringValueInput.getText()).toString();
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toastError("Please fill in all fields");
+                SketchwareUtil.toastError(getString(R.string.java_fill_all_fields));
                 return;
             }
 
             if (stringsEditorManager.isXmlStringsExist(listmap, key)) {
-                SketchwareUtil.toastError("\"" + key + "\" is already exist");
+                SketchwareUtil.toastError(getString(R.string.java_quoted_item_exists, key));
                 return;
             }
             addString(key, value, Objects.requireNonNull(binding.stringHeaderInput.getText()).toString().trim());

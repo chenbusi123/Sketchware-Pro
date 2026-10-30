@@ -13,10 +13,22 @@ import mod.hey.studios.util.Helper;
 import mod.jbk.util.LogUtil;
 import mod.jbk.util.OldResourceIdMapper;
 import pro.sketchware.R;
+import pro.sketchware.SketchApplication;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 
 public class EventsHandler {
+
+    private static void showInvalidEventEntry(int fieldResId, int position) {
+        var context = SketchApplication.getContext();
+        SketchwareUtil.toastError(context.getString(R.string.java_custom_event_invalid_entry,
+                context.getString(fieldResId), position));
+    }
+
+    private static void showNullEvent(int position) {
+        SketchwareUtil.toastError(SketchApplication.getContext()
+                .getString(R.string.java_custom_event_null, position));
+    }
 
     public static final String CUSTOM_EVENTS_FILE_PATH = FileUtil.getExternalStorageDir() + "/.sketchware/data/system/events.json";
     public static final String CUSTOM_LISTENERE_FILE_PATH = FileUtil.getExternalStorageDir() + "/.sketchware/data/system/listeners.json";
@@ -69,14 +81,14 @@ public class EventsHandler {
                         if (name instanceof String) {
                             array.add((String) name);
                         } else {
-                            SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_name, i + 1);
                         }
                     }
                 } else {
-                    SketchwareUtil.toastError("Found invalid var data type in Custom Event #" + (i + 1));
+                    showInvalidEventEntry(R.string.java_field_var, i + 1);
                 }
             } else {
-                SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                showNullEvent(i);
             }
         }
 
@@ -113,14 +125,14 @@ public class EventsHandler {
                         if (name instanceof String) {
                             list.add((String) name);
                         } else {
-                            SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_name, i + 1);
                         }
                     }
                 } else {
-                    SketchwareUtil.toastError("Found invalid var data type in Custom Event #" + (i + 1));
+                    showInvalidEventEntry(R.string.java_field_var, i + 1);
                 }
             } else {
-                SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                showNullEvent(i);
             }
         }
     }
@@ -154,14 +166,14 @@ public class EventsHandler {
                                 list.add((String) listener);
                             }
                         } else {
-                            SketchwareUtil.toastError("Found invalid listener data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_listener, i + 1);
                         }
                     }
                 } else {
-                    SketchwareUtil.toastError("Found invalid var data type in Custom Event #" + (i + 1));
+                    showInvalidEventEntry(R.string.java_field_var, i + 1);
                 }
             } else {
-                SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                showNullEvent(i);
             }
         }
     }
@@ -200,14 +212,14 @@ public class EventsHandler {
                                 if (eventName instanceof String) {
                                     list.add((String) eventName);
                                 } else {
-                                    SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                                    showInvalidEventEntry(R.string.java_field_name, i + 1);
                                 }
                             }
                         } else {
-                            SketchwareUtil.toastError("Found invalid listener data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_listener, i + 1);
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                        showNullEvent(i);
                     }
                 }
                 break;
@@ -239,18 +251,18 @@ public class EventsHandler {
                                     try {
                                         yield OldResourceIdMapper.getDrawableFromOldResourceId(Integer.parseInt((String) icon));
                                     } catch (NumberFormatException e) {
-                                        SketchwareUtil.toastError("Found invalid icon data type in Custom Event #" + (i + 1));
+                                        showInvalidEventEntry(R.string.java_field_icon, i + 1);
                                         yield R.drawable.android_icon;
                                     }
                                 } else {
-                                    SketchwareUtil.toastError("Found invalid icon data type in Custom Event #" + (i + 1));
+                                    showInvalidEventEntry(R.string.java_field_icon, i + 1);
                                 }
                             }
                         } else {
-                            SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_name, i + 1);
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                        showNullEvent(i);
                     }
                 }
 
@@ -288,14 +300,14 @@ public class EventsHandler {
                                 if (description instanceof String) {
                                     yield (String) description;
                                 } else {
-                                    SketchwareUtil.toastError("Found invalid description data type in Custom Event #" + (i + 1));
+                                    showInvalidEventEntry(R.string.java_field_description, i + 1);
                                 }
                             }
                         } else {
-                            SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_name, i + 1);
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                        showNullEvent(i);
                     }
                 }
 
@@ -366,14 +378,14 @@ public class EventsHandler {
                                             .replace("$NAME", targetId.toUpperCase());
                                     yield String.format(formattedCode, param);
                                 } else {
-                                    SketchwareUtil.toastError("Found invalid code data type in Custom Event #" + (i + 1));
+                                    showInvalidEventEntry(R.string.java_field_code, i + 1);
                                 }
                             }
                         } else {
-                            SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_name, i + 1);
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                        showNullEvent(i);
                     }
                 }
 
@@ -402,14 +414,14 @@ public class EventsHandler {
                                 if (parameters instanceof String) {
                                     yield (String) parameters;
                                 } else {
-                                    SketchwareUtil.toastError("Found invalid parameters data type in Custom Event #" + (i + 1));
+                                    showInvalidEventEntry(R.string.java_field_parameters, i + 1);
                                 }
                             }
                         } else {
-                            SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_name, i + 1);
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                        showNullEvent(i);
                     }
                 }
 
@@ -444,14 +456,14 @@ public class EventsHandler {
                                 if (headerSpec instanceof String) {
                                     yield ((String) headerSpec).replace("###", name);
                                 } else {
-                                    SketchwareUtil.toastError("Found invalid header spec data type in Custom Event #" + (i + 1));
+                                    showInvalidEventEntry(R.string.java_field_header_spec, i + 1);
                                 }
                             }
                         } else {
-                            SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                            showInvalidEventEntry(R.string.java_field_name, i + 1);
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid (null) Custom Event at position " + i);
+                        showNullEvent(i);
                     }
                 }
 
@@ -491,11 +503,11 @@ public class EventsHandler {
                                         .replace("$NAME", var.toUpperCase());
                                 yield String.format(formattedCode, param);
                             } else {
-                                SketchwareUtil.toastError("Found invalid code data type in Custom Event #" + (i + 1));
+                                showInvalidEventEntry(R.string.java_field_code, i + 1);
                             }
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                        showInvalidEventEntry(R.string.java_field_name, i + 1);
                     }
                 }
 
@@ -526,11 +538,11 @@ public class EventsHandler {
                             list.addAll(new ArrayList<>(Arrays.asList(((String) imports).split("\n"))));
                         }
                     } else {
-                        SketchwareUtil.toastError("Found invalid import data type in Custom Event #" + (i + 1));
+                        showInvalidEventEntry(R.string.java_field_import, i + 1);
                     }
                 }
             } else {
-                SketchwareUtil.toastError("Found invalid name data type in Custom Event #" + (i + 1));
+                showInvalidEventEntry(R.string.java_field_name, i + 1);
             }
         }
     }

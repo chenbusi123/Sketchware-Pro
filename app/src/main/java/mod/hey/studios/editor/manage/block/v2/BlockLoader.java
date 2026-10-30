@@ -70,7 +70,8 @@ public class BlockLoader {
                 }
 
             } catch (Exception e) {
-                SketchwareUtil.toastError("Failed to get Custom Blocks for project " + sc_id + ": " + e.getMessage());
+                SketchwareUtil.toastError(SketchApplication.getContext().getString(R.string.java_project_custom_blocks_failed,
+                        sc_id, e.getMessage()));
             }
         }
 
@@ -118,7 +119,7 @@ public class BlockLoader {
                 info.setName((String) name);
             } else {
                 info.setName("");
-                SketchwareUtil.toastError("Invalid name entry in Custom Block #" + (i + 1));
+                SketchwareUtil.toastError(context.getString(R.string.java_custom_block_name_entry_invalid, i + 1));
                 continue;
             }
 
@@ -155,7 +156,7 @@ public class BlockLoader {
                         int harmonizedColor = primaryColor != 0 ? MaterialColors.harmonize(parsedColor, primaryColor) : parsedColor;
                         info.setColor(harmonizedColor);
                     } catch (IllegalArgumentException e) {
-                        SketchwareUtil.toastError("Invalid color in Custom Block #" + (i + 1));
+                        SketchwareUtil.toastError(context.getString(R.string.java_custom_block_color_invalid, i + 1));
                         continue;
                     }
                 }
@@ -172,15 +173,18 @@ public class BlockLoader {
                                 try {
                                     info.setPaletteColor(paletteColor);
                                 } catch (IllegalArgumentException e) {
-                                    SketchwareUtil.toastError("Invalid color in Custom Block palette #" + mapPaletteNumber);
+                                    SketchwareUtil.toastError(context.getString(
+                                            R.string.java_custom_palette_color_invalid, mapPaletteNumber));
                                 }
                             }
                         } catch (NumberFormatException e) {
-                            SketchwareUtil.toastError("Invalid palette number in Custom Block #" + (i + 1));
+                            SketchwareUtil.toastError(context.getString(
+                                    R.string.java_custom_block_palette_number_invalid, i + 1));
                             continue;
                         }
                     } else {
-                        SketchwareUtil.toastError("Invalid palette number value type in Custom Block #" + (i + 1));
+                        SketchwareUtil.toastError(context.getString(
+                                R.string.java_custom_block_palette_type_invalid, i + 1));
                         continue;
                     }
                 }

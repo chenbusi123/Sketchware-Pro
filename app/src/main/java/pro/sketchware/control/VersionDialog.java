@@ -29,7 +29,7 @@ public class VersionDialog {
     public void show() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity);
         builder.setIcon(R.drawable.numbers_48);
-        builder.setTitle("Advanced Version Control");
+        builder.setTitle(R.string.java_advanced_version_control);
 
         long initialVerCode = MIN_VERSION_CODE;
         try {
@@ -72,13 +72,13 @@ public class VersionDialog {
             if (validVerCode) {
                 binding.tilVersionCode.setError(null);
             } else {
-                binding.tilVersionCode.setError("Version code must be between 1 and 2100000000");
+                binding.tilVersionCode.setError(activity.getString(R.string.java_version_code_range));
             }
 
             if (validVerName) {
                 binding.tilVersionName.setError(null);
             } else {
-                binding.tilVersionName.setError("Invalid Version Name");
+                binding.tilVersionName.setError(activity.getString(R.string.java_version_name_invalid));
             }
 
             if (!mB.a() && validVerCode && validVerName) {

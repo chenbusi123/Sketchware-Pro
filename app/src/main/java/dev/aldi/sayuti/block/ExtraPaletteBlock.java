@@ -196,7 +196,8 @@ public class ExtraPaletteBlock {
             if (split.length > 1) {
                 logicEditor.a(split[1], "v", split[0], "getVar").setTag(customVariables.get(i));
             } else {
-                SketchwareUtil.toastError("Found invalid data of Custom Variable #" + (i + 1) + ": \"" + customVariables.get(i) + "\"");
+                SketchwareUtil.toastError(logicEditor.getString(R.string.java_custom_variable_data_invalid,
+                        i + 1, customVariables.get(i)));
             }
         }
 
@@ -1227,8 +1228,9 @@ public class ExtraPaletteBlock {
                                     if (spec instanceof String specString) {
                                         logicEditor.a(specString, getTitleBgColor());
                                     } else {
-                                        SketchwareUtil.toastError("Custom Block #" + paletteBlocks +
-                                                " of current palette has an invalid spec data type");
+                                        SketchwareUtil.toastError(logicEditor.getString(
+                                                R.string.java_current_palette_block_field_invalid,
+                                                paletteBlocks, "spec"));
                                     }
                                 } else {
                                     Object name = map.get("name");
@@ -1242,18 +1244,21 @@ public class ExtraPaletteBlock {
                                             logicEditor.a("", typeString, "", nameString);
                                         }
                                     } else {
-                                        SketchwareUtil.toastError("Custom Block #" + paletteBlocks +
-                                                " of current palette has an invalid name data type");
+                                        SketchwareUtil.toastError(logicEditor.getString(
+                                                R.string.java_current_palette_block_field_invalid,
+                                                paletteBlocks, logicEditor.getString(R.string.java_field_name)));
                                     }
                                 }
                             } else {
-                                SketchwareUtil.toastError("Custom Block #" + paletteBlocks +
-                                        " of current palette has an invalid block type data type");
+                                SketchwareUtil.toastError(logicEditor.getString(
+                                        R.string.java_current_palette_block_field_invalid,
+                                        paletteBlocks, "block type"));
                             }
                         }
                     } else {
-                        SketchwareUtil.toastError("Custom Block #" + paletteBlocks +
-                                " of current palette has an invalid block palette data type");
+                        SketchwareUtil.toastError(logicEditor.getString(
+                                R.string.java_current_palette_block_field_invalid,
+                                paletteBlocks, "block palette"));
                     }
                 }
                 break;

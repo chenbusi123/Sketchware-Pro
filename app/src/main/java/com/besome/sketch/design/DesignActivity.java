@@ -325,7 +325,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
      */
     private void indicateCompileErrorOccurred(String error) {
         new CompileErrorSaver(sc_id).writeLogsToFile(error);
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Show compile log", Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.java_show_compile_log, Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(Helper.getResString(R.string.common_word_show), v -> {
             if (!mB.a()) {
                 snackbar.dismiss();
@@ -369,23 +369,24 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
                     Shell.cmd("cat " + apkUri + " | pm install -S " + length).to(stdout, stderr).submit(result -> {
                         if (result.isSuccess()) {
-                            SketchwareUtil.toast("Package installed successfully!");
+                            SketchwareUtil.toast(getString(R.string.project_install_success));
                             if (ConfigActivity.isSettingEnabled(ConfigActivity.SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING)) {
                                 Intent launcher = getPackageManager().getLaunchIntentForPackage(q.packageName);
                                 if (launcher != null) {
                                     startActivity(launcher);
                                 } else {
-                                    SketchwareUtil.toastError("Couldn't launch project, either not installed or not with launcher activity.");
+                                    SketchwareUtil.toastError(getString(R.string.project_launch_failed));
                                 }
                             }
                         } else {
                             String sharedErrorMessage = "Failed to install package, result code: " + result.getCode() + ". ";
-                            SketchwareUtil.toastError(sharedErrorMessage + "Logs are available in /Internal storage/.sketchware/debug.txt", Toast.LENGTH_LONG);
+                            SketchwareUtil.toastError(getString(R.string.project_debug_logs_available,
+                                    sharedErrorMessage), Toast.LENGTH_LONG);
                             LogUtil.e("DesignActivity", sharedErrorMessage + "stdout: " + stdout + ", stderr: " + stderr);
                         }
                     });
                 } else {
-                    SketchwareUtil.toastError("No root access granted. Continuing using default package install prompt.");
+                    SketchwareUtil.toastError(getString(R.string.project_root_access_missing));
                     requestPackageInstallerInstall();
                 }
             });
@@ -402,13 +403,13 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
         startActivity(intent);
 
-        Snackbar.make(coordinatorLayout, "App install prompt launched", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Open App", v -> {
+        Snackbar.make(coordinatorLayout, R.string.java_install_prompt_launched, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.common_word_open_app, v -> {
                     Intent launchIntent = getPackageManager().getLaunchIntentForPackage(q.packageName);
                     if (launchIntent != null) {
                         startActivity(launchIntent);
                     } else {
-                        SketchwareUtil.toast("App not installed yet or launch activity not found.");
+                        SketchwareUtil.toast(getString(R.string.project_not_installed));
                     }
                 })
                 .show();
@@ -500,39 +501,39 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
         bottomPopupMenu = new PopupMenu(this, btnOptions);
         bottomMenu = bottomPopupMenu.getMenu();
-        bottomMenu.add(Menu.NONE, 1, Menu.NONE, "Build Settings").setOnMenuItemClickListener(item -> {
+        bottomMenu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_build_settings).setOnMenuItemClickListener(item -> {
             BuildSettingsBottomSheet sheet = BuildSettingsBottomSheet.newInstance(sc_id);
             sheet.show(getSupportFragmentManager(), BuildSettingsBottomSheet.TAG);
             return true;
         });
-        bottomMenu.add(Menu.NONE, 2, Menu.NONE, "Clean temporary files").setVisible(false).setOnMenuItemClickListener(item -> {
+        bottomMenu.add(Menu.NONE, 2, Menu.NONE, R.string.java_clean_temporary_files).setVisible(false).setOnMenuItemClickListener(item -> {
             new Thread(() -> {
                 FileUtil.deleteFile(q.projectMyscPath);
                 updateBottomMenu();
-                runOnUiThread(() -> SketchwareUtil.toast("Done cleaning temporary files!"));
+                runOnUiThread(() -> SketchwareUtil.toast(getString(R.string.project_temp_files_cleaned)));
             }).start();
             return true;
         });
-        bottomMenu.add(Menu.NONE, 3, Menu.NONE, "Show last compile error").setOnMenuItemClickListener(item -> {
+        bottomMenu.add(Menu.NONE, 3, Menu.NONE, R.string.java_show_last_compile_error).setOnMenuItemClickListener(item -> {
             new CompileErrorSaver(sc_id).showLastErrors(this);
             return true;
         });
-        bottomMenu.add(Menu.NONE, 5, Menu.NONE, "Show source code").setOnMenuItemClickListener(item -> {
+        bottomMenu.add(Menu.NONE, 5, Menu.NONE, R.string.java_show_source_code).setOnMenuItemClickListener(item -> {
             showCurrentActivitySrcCode();
             return true;
         });
-        bottomMenu.add(Menu.NONE, 4, Menu.NONE, "Install last built APK").setVisible(false).setOnMenuItemClickListener(item -> {
+        bottomMenu.add(Menu.NONE, 4, Menu.NONE, R.string.java_install_last_built_apk).setVisible(false).setOnMenuItemClickListener(item -> {
             if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
                 installBuiltApk();
-            } else SketchwareUtil.toast("APK doesn't exist anymore");
+            } else SketchwareUtil.toast(getString(R.string.project_apk_missing));
             return true;
         });
-        bottomMenu.add(Menu.NONE, 6, Menu.NONE, "Show Apk signatures").setVisible(false).setOnMenuItemClickListener(item -> {
+        bottomMenu.add(Menu.NONE, 6, Menu.NONE, R.string.java_show_apk_signatures).setVisible(false).setOnMenuItemClickListener(item -> {
             ApkSignatures apkSignatures = new ApkSignatures(this, q.finalToInstallApkPath);
             apkSignatures.showSignaturesDialog();
             return true;
         });
-        bottomMenu.add(Menu.NONE, 7, Menu.NONE, "Direct XML editor").setOnMenuItemClickListener(item -> {
+        bottomMenu.add(Menu.NONE, 7, Menu.NONE, R.string.java_direct_xml_editor).setOnMenuItemClickListener(item -> {
             toViewCodeEditor();
             return true;
         });
@@ -846,7 +847,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                 if (isFinishing()) return;
                 h();
                 if (code.isEmpty()) {
-                    SketchwareUtil.toast("Failed to generate source.");
+                    SketchwareUtil.toast(getString(R.string.project_source_generation_failed));
                     return;
                 }
                 var scheme = filename.endsWith(".xml") ? CodeViewerActivity.SCHEME_XML : CodeViewerActivity.SCHEME_JAVA;
@@ -1250,23 +1251,21 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
                     MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(activity);
                     if (isMissingDirectory) {
-                        dialog.setTitle("Missing directory detected");
-                        dialog.setMessage("A directory important for building is missing. " +
-                                "Sketchware Pro can try creating " + e.getMissingFile().getAbsolutePath() +
-                                " if you'd like to.");
-                        dialog.setNeutralButton("Create", (v, which) -> {
+                        dialog.setTitle(R.string.missing_directory_title);
+                        dialog.setMessage(activity.getString(R.string.missing_directory_message,
+                                e.getMissingFile().getAbsolutePath()));
+                        dialog.setNeutralButton(R.string.common_word_create, (v, which) -> {
                             v.dismiss();
                             if (!e.getMissingFile().mkdirs()) {
-                                SketchwareUtil.toastError("Failed to create directory / directories!");
+                                SketchwareUtil.toastError(activity.getString(R.string.missing_directory_create_failed));
                             }
                         });
                     } else {
-                        dialog.setTitle("Missing file detected");
-                        dialog.setMessage("A file needed for building is missing. " +
-                                "Put the correct file back to " + e.getMissingFile().getAbsolutePath() +
-                                " and try building again.");
+                        dialog.setTitle(R.string.missing_file_title);
+                        dialog.setMessage(activity.getString(R.string.missing_file_message,
+                                e.getMissingFile().getAbsolutePath()));
                     }
-                    dialog.setPositiveButton("Dismiss", null);
+                    dialog.setPositiveButton(R.string.common_word_dismiss, null);
                     dialog.show();
                 });
             } catch (zy zy) {
@@ -1400,7 +1399,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             btnRun.setIcon(ContextCompat.getDrawable(context, isRunning ? R.drawable.ic_mtrl_stop : R.drawable.ic_mtrl_run));
             btnRun.setIconTint(ColorStateList.valueOf(ThemeUtils.getColor(context, isRunning ? R.attr.colorOnErrorContainer : R.attr.colorSurfaceContainerLowest)));
             btnRun.setTextColor(ColorStateList.valueOf(ThemeUtils.getColor(context, isRunning ? R.attr.colorOnErrorContainer : R.attr.colorSurfaceContainerLowest)));
-            btnRun.setText(isRunning ? "Stop" : "Run");
+            btnRun.setText(isRunning ? R.string.common_word_stop : R.string.common_word_run);
             btnOptions.setEnabled(!isRunning);
             progressContainer.setVisibility(isRunning ? View.VISIBLE : View.GONE);
         }

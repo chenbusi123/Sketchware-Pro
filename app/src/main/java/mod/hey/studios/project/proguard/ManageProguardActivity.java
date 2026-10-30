@@ -15,7 +15,6 @@ import java.util.HashMap;
 
 import mod.agus.jcoderz.editor.manage.library.locallibrary.ManageLocalLibrary;
 import mod.hey.studios.code.SrcCodeEditor;
-import pro.sketchware.R;
 import pro.sketchware.databinding.ManageProguardBinding;
 
 public class ManageProguardActivity extends BaseAppCompatActivity
@@ -58,7 +57,7 @@ public class ManageProguardActivity extends BaseAppCompatActivity
         }
 
         MaterialAlertDialogBuilder bld = new MaterialAlertDialogBuilder(this);
-        bld.setTitle("Select Local libraries");
+        bld.setTitle(R.string.java_select_local_libraries);
         bld.setMultiChoiceItems(
                 libraries,
                 enabledLibraries,

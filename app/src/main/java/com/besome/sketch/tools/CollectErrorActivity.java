@@ -38,12 +38,10 @@ public class CollectErrorActivity extends BaseAppCompatActivity {
 
             var dialog = new MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.common_error_an_error_occurred)
-                    .setMessage("An error occurred while running Sketchware Pro. " +
-                            "Do you want to report this error log so that we can fix it? " +
-                            "No personal information will be included.")
-                    .setPositiveButton("Copy", null)
-                    .setNegativeButton("Cancel", (dialogInterface, which) -> finish())
-                    .setNeutralButton("Show error", null) // null to set proper onClick listeners later without dismissing the AlertDialog
+                    .setMessage(R.string.collect_error_report_prompt)
+                    .setPositiveButton(R.string.common_word_copy, null)
+                    .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> finish())
+                    .setNeutralButton(R.string.common_word_show_error, null) // null to set proper onClick listeners later without dismissing the AlertDialog
                     .setCancelable(false)
                     .show();
 
@@ -60,7 +58,8 @@ public class CollectErrorActivity extends BaseAppCompatActivity {
                     info = getPackageManager().getPackageInfo(getPackageName(), 0);
                 } catch (PackageManager.NameNotFoundException e) {
                     messageView.setTextIsSelectable(true);
-                    messageView.setText("Somehow couldn't get package info. Stack trace:\n" + Log.getStackTraceString(e));
+                    messageView.setText(getString(R.string.collect_error_package_info_failed,
+                            Log.getStackTraceString(e)));
                     return;
                 }
 
@@ -81,7 +80,7 @@ public class CollectErrorActivity extends BaseAppCompatActivity {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("error", deviceInfo + "\n\n```\n" + error + "\n```");
                 clipboard.setPrimaryClip(clip);
-                runOnUiThread(() -> SketchwareUtil.toast("Copied", Toast.LENGTH_LONG));
+                runOnUiThread(() -> SketchwareUtil.toast(getString(R.string.common_word_copied), Toast.LENGTH_LONG));
             });
         }
     }

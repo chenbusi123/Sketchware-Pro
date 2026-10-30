@@ -30,6 +30,7 @@ import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 import pro.sketchware.R;
+import pro.sketchware.SketchApplication;
 import pro.sketchware.databinding.DialogPaletteBinding;
 import pro.sketchware.databinding.ItemCustomBlockBinding;
 import pro.sketchware.databinding.ViewUsedCustomBlocksBinding;
@@ -95,7 +96,8 @@ public class CustomBlocksDialog {
                         }
 
                         if (selectedBeans.isEmpty()) {
-                            SketchwareUtil.toastError("Please select at least one block to import.");
+                            SketchwareUtil.toastError(SketchApplication.getContext()
+                                    .getString(R.string.java_select_block_required));
                             return;
                         }
 
@@ -106,7 +108,7 @@ public class CustomBlocksDialog {
 
             } else {
                 context.runOnUiThread(() -> {
-                    dialogBinding.subtitle.setText("You haven't used any custom blocks in this project");
+                    dialogBinding.subtitle.setText(R.string.java_no_custom_blocks_used);
                     dialogBinding.progressIndicator.setVisibility(View.GONE);
                 });
             }
@@ -137,18 +139,18 @@ public class CustomBlocksDialog {
         AtomicInteger selectedPalette = new AtomicInteger(paletteList.size() - 1);
 
         new MaterialAlertDialogBuilder(context)
-                .setTitle("Import Custom blocks to")
+                .setTitle(R.string.java_import_custom_blocks_to)
                 .setSingleChoiceItems(paletteNames.toArray(new String[0]), selectedPalette.get(), (dialog, which) -> selectedPalette.set(which))
-                .setNegativeButton("Create new palette", (dialog, which) -> {
+                .setNegativeButton(R.string.java_create_new_palette, (dialog, which) -> {
                     showCreatePaletteDialog(context, paletteList, paletteDir, customBlocksManager, list, blocksList, allBlocksList, blocksDir);
                     dialog.dismiss();
                 })
-                .setPositiveButton("Import", (dialog, which) -> {
+                .setPositiveButton(pro.sketchware.R.string.common_word_import, (dialog, which) -> {
                     addBlocksToList(customBlocksManager, list, blocksList, selectedPalette.get() + 9);
                     allBlocksList.addAll(blocksList);
                     FileUtil.writeFile(blocksDir, new Gson().toJson(allBlocksList));
                     BlockLoader.refresh();
-                    SketchwareUtil.toast("Blocks imported!");
+                    SketchwareUtil.toast(SketchApplication.getContext().getString(R.string.java_blocks_imported));
                 })
                 .show();
     }
@@ -183,7 +185,7 @@ public class CustomBlocksDialog {
 
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(context);
         dialog.setIcon(R.drawable.icon_style_white_96);
-        dialog.setTitle("Create a new palette");
+        dialog.setTitle(R.string.java_create_new_palette);
 
         DialogPaletteBinding binding = DialogPaletteBinding.inflate(((Activity) context).getLayoutInflater());
 
@@ -219,7 +221,7 @@ public class CustomBlocksDialog {
             allBlocksList.addAll(blocksList);
             FileUtil.writeFile(blocksDir, new Gson().toJson(allBlocksList));
             BlockLoader.refresh();
-            SketchwareUtil.toast("Blocks imported!");
+            SketchwareUtil.toast(SketchApplication.getContext().getString(R.string.java_blocks_imported));
             dialogInterface.dismiss();
         });
         dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
@@ -233,19 +235,19 @@ public class CustomBlocksDialog {
 
     private boolean validateInput(DialogPaletteBinding binding, String name, String color) {
         if (name.isEmpty()) {
-            binding.name.setError("Name cannot be empty");
+            binding.name.setError(binding.getRoot().getContext().getString(R.string.java_name_empty));
             binding.name.requestFocus();
             return false;
         }
         if (color.isEmpty()) {
-            binding.color.setError("Color cannot be empty");
+            binding.color.setError(binding.getRoot().getContext().getString(R.string.java_color_empty));
             binding.color.requestFocus();
             return false;
         }
         try {
             Color.parseColor(color);
         } catch (IllegalArgumentException e) {
-            binding.color.setError("Invalid hexadecimal color");
+            binding.color.setError(binding.getRoot().getContext().getString(R.string.java_hex_color_invalid));
             binding.color.requestFocus();
             return false;
         }
@@ -372,9 +374,9 @@ public class CustomBlocksDialog {
                         binding.checkBox.setChecked(reversedState);
                         block.isSelected = reversedState;
                     } else if (blockInfo.equals("Missing")) {
-                        SketchwareUtil.toastError("This block is Missing");
+                        SketchwareUtil.toastError(itemView.getContext().getString(R.string.java_block_missing));
                     } else {
-                        SketchwareUtil.toastError("This block already exists in your collection");
+                        SketchwareUtil.toastError(itemView.getContext().getString(R.string.java_block_exists_collection));
                     }
                 });
             }

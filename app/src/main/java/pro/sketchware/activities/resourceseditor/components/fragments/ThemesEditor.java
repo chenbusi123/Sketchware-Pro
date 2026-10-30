@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Objects;
 
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
 import pro.sketchware.activities.resourceseditor.ResourcesEditorActivity;
 import pro.sketchware.activities.resourceseditor.components.adapters.StylesAdapter;
 import pro.sketchware.activities.resourceseditor.components.models.StyleModel;
@@ -114,8 +113,10 @@ public class ThemesEditor extends Fragment {
     private void updateNoContentLayout() {
         if (themesList.isEmpty()) {
             binding.noContentLayout.setVisibility(View.VISIBLE);
-            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title), "Themes"));
-            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body), "themes"));
+            binding.noContentTitle.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_title),
+                    getString(R.string.java_resource_themes)));
+            binding.noContentBody.setText(String.format(Helper.getResString(R.string.resource_manager_no_list_body),
+                    getString(R.string.java_resource_themes)));
         } else {
             binding.noContentLayout.setVisibility(View.GONE);
         }
@@ -124,14 +125,14 @@ public class ThemesEditor extends Fragment {
     public void showAddThemeDialog() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(activity);
         StyleEditorAddBinding binding = StyleEditorAddBinding.inflate(getLayoutInflater());
-        dialog.setTitle("Create new theme");
-        dialog.setPositiveButton("Create", (d, which) -> {
+        dialog.setTitle(R.string.java_create_new_theme);
+        dialog.setPositiveButton(pro.sketchware.R.string.myprojects_sign_apk_new_certificate_button_create, (d, which) -> {
             String themeName = Objects.requireNonNull(binding.styleName.getText()).toString();
             String parent = Objects.requireNonNull(binding.styleParent.getText()).toString();
             String header = Objects.requireNonNull(binding.styleHeaderInput.getText()).toString();
 
             if (themeName.isEmpty()) {
-                SketchwareUtil.toastError("Theme name Input is Empty");
+                SketchwareUtil.toastError(getString(R.string.java_theme_name_empty));
                 return;
             }
 
@@ -161,14 +162,14 @@ public class ThemesEditor extends Fragment {
             binding.styleHeaderInput.setText(notesMap.get(position));
         }
 
-        dialog.setTitle("Edit theme");
-        dialog.setPositiveButton("Edit", (d, which) -> {
+        dialog.setTitle(pro.sketchware.R.string.common_word_edit_theme);
+        dialog.setPositiveButton(pro.sketchware.R.string.common_word_edit, (d, which) -> {
             String themeName = Objects.requireNonNull(binding.styleName.getText()).toString();
             String parent = Objects.requireNonNull(binding.styleParent.getText()).toString();
             String header = Objects.requireNonNull(binding.styleHeaderInput.getText()).toString();
 
             if (themeName.isEmpty()) {
-                SketchwareUtil.toastError("Theme name Input is Empty");
+                SketchwareUtil.toastError(getString(R.string.java_theme_name_empty));
                 return;
             }
 
@@ -185,7 +186,7 @@ public class ThemesEditor extends Fragment {
         });
         dialog.setNeutralButton(Helper.getResString(R.string.common_word_delete), (d, which) -> new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.common_word_warning)
-                .setMessage("Are you sure you want to delete " + theme.getStyleName() + "?")
+                .setMessage(getString(R.string.java_confirm_delete_named, theme.getStyleName()))
                 .setPositiveButton(R.string.common_word_yes, (d2, w) -> {
                     themesList.remove(position);
                     notesMap.remove(position);
@@ -194,7 +195,7 @@ public class ThemesEditor extends Fragment {
                     updateNoContentLayout();
                     hasUnsavedChanges = true;
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(pro.sketchware.R.string.cancel, null)
                 .show());
         dialog.setNegativeButton(getString(R.string.cancel), null);
         dialog.setView(binding.getRoot());
@@ -208,7 +209,7 @@ public class ThemesEditor extends Fragment {
         dialog.setContentView(binding.getRoot());
         dialog.show();
 
-        binding.title.setText(theme.getStyleName() + " attributes");
+        binding.title.setText(getString(R.string.java_named_attributes, theme.getStyleName()));
 
         attributesAdapter = new PropertyInputItem.AttributesAdapter();
         attributesAdapter.setOnItemClickListener(
@@ -222,14 +223,14 @@ public class ThemesEditor extends Fragment {
                     public void onItemLongClick(LinkedHashMap<String, String> attributes, String attr) {
                         new MaterialAlertDialogBuilder(requireContext())
                                 .setTitle(R.string.common_word_warning)
-                                .setMessage("Are you sure you want to delete " + attr + "?")
+                                .setMessage(getString(R.string.java_confirm_delete_named, attr))
                                 .setPositiveButton(R.string.common_word_yes, (d, w) -> {
                                     attributes.remove(attr);
                                     theme.setAttributes(attributes);
                                     attributesAdapter.submitList(new ArrayList<>(attributes.keySet()));
                                     hasUnsavedChanges = true;
                                 })
-                                .setNegativeButton("Cancel", null)
+                                .setNegativeButton(pro.sketchware.R.string.cancel, null)
                                 .create()
                                 .show();
                     }
@@ -259,14 +260,14 @@ public class ThemesEditor extends Fragment {
             binding.attrValue.setText(theme.getAttribute(attr));
         }
 
-        dialog.setTitle(isEditing ? "Edit attribute " : "Create new attribute");
+        dialog.setTitle(isEditing ? R.string.java_edit_attribute : R.string.java_create_new_attribute);
 
         dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (d, which) -> {
             String attribute = Objects.requireNonNull(binding.attrName.getText()).toString();
             String value = Objects.requireNonNull(binding.attrValue.getText()).toString();
 
             if (attribute.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toastError("Please fill in all fields");
+                SketchwareUtil.toastError(getString(R.string.java_fill_all_fields));
                 return;
             }
 

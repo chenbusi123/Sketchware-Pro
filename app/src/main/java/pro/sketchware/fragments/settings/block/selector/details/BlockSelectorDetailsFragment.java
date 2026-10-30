@@ -130,8 +130,8 @@ public class BlockSelectorDetailsFragment extends qA {
         }
 
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
-        dialog.setTitle("New Selector Item");
-        dialog.setPositiveButton("Create", (v, which) -> {
+        dialog.setTitle(R.string.java_new_selector_item);
+        dialog.setPositiveButton(pro.sketchware.R.string.myprojects_sign_apk_new_certificate_button_create, (v, which) -> {
             String newItem = Helper.getText(dialogBinding.activityNameInput);
             if (newItem != null && !newItem.isEmpty()) {
                 if (!isEdit) {
@@ -144,7 +144,7 @@ public class BlockSelectorDetailsFragment extends qA {
             }
             v.dismiss();
         });
-        dialog.setNegativeButton("Cancel", null);
+        dialog.setNegativeButton(pro.sketchware.R.string.cancel, null);
         dialog.setView(dialogBinding.getRoot());
         dialog.show();
     }
@@ -153,7 +153,7 @@ public class BlockSelectorDetailsFragment extends qA {
         DialogSelectorActionsBinding dialogBinding = DialogSelectorActionsBinding.inflate(LayoutInflater.from(requireContext()));
 
         AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).create();
-        dialog.setTitle("Actions");
+        dialog.setTitle(pro.sketchware.R.string.common_word_actions);
         dialog.setView(dialogBinding.getRoot());
 
         dialogBinding.edit.setOnClickListener(v -> {
@@ -182,17 +182,17 @@ public class BlockSelectorDetailsFragment extends qA {
 
     private void showConfirmationDialog(String message, OnDialogClickListener onConfirm, OnDialogClickListener onCancel) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
-        dialog.setTitle("Attention");
+        dialog.setTitle(pro.sketchware.R.string.common_word_attention);
         dialog.setMessage(message);
-        dialog.setPositiveButton("Yes", (v, which) -> onConfirm.onClick(v));
-        dialog.setNegativeButton("Cancel", (v, which) -> onCancel.onClick(v));
+        dialog.setPositiveButton(pro.sketchware.R.string.common_word_yes, (v, which) -> onConfirm.onClick(v));
+        dialog.setNegativeButton(pro.sketchware.R.string.cancel, (v, which) -> onCancel.onClick(v));
 
         dialog.show();
     }
 
     private void saveAll() {
         FileUtil.writeFile(BlockSelectorConsts.BLOCK_SELECTORS_FILE.getAbsolutePath(), getGson().toJson(selectors));
-        SketchwareUtil.toast("Saved!");
+        SketchwareUtil.toast(getString(R.string.java_saved_exclamation));
     }
 
     @Override

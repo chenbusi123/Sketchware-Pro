@@ -98,7 +98,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     binding.nameLayout.setErrorEnabled(false);
                     binding.save.setEnabled(true);
                 } else if (!mode.equals("edit")) {
-                    binding.nameLayout.setError("Block name already in use");
+                    binding.nameLayout.setError(getString(R.string.java_block_name_in_use));
                     binding.nameLayout.setErrorEnabled(true);
                     binding.save.setEnabled(false);
                 } else {
@@ -106,7 +106,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     Object blockNameObject = savedBlocksListBlock.get("name");
 
                     if (!string.equals(blockNameObject)) {
-                        binding.nameLayout.setError("Block name already in use");
+                        binding.nameLayout.setError(getString(R.string.java_block_name_in_use));
                         binding.nameLayout.setErrorEnabled(true);
                         binding.save.setEnabled(false);
                     }
@@ -135,7 +135,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     "Header (h)"
             );
             AtomicInteger choice = new AtomicInteger();
-            new MaterialAlertDialogBuilder(this).setTitle("Block type")
+            new MaterialAlertDialogBuilder(this).setTitle(pro.sketchware.R.string.common_word_block_type)
                     .setSingleChoiceItems(choices.toArray(new String[0]),
                             types.indexOf(Helper.getText(binding.type)), (dialog, which) -> choice.set(which))
                     .setPositiveButton(R.string.common_word_save, (dialog, which) -> binding.type.setText(types.get(choice.get())))
@@ -178,7 +178,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!PropertiesUtil.isHexColor(s.toString())) {
-                    binding.colourLayout.setError("Invalid hex color");
+                    binding.colourLayout.setError(getString(R.string.java_hex_color_short_invalid));
                     binding.colourLayout.setErrorEnabled(true);
                 } else {
                     binding.colourLayout.setError(null);
@@ -191,12 +191,12 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         binding.cancel.setOnClickListener(Helper.getBackPressedClickListener(this));
         binding.save.setOnClickListener(v -> {
             if (!PropertiesUtil.isHexColor(Helper.getText(binding.colour))) {
-                SketchwareUtil.showMessage(getApplicationContext(), "Invalid hex color");
+                SketchwareUtil.showMessage(getApplicationContext(), getString(R.string.java_hex_color_short_invalid));
                 return;
             }
             Matcher matcher = PARAM_PATTERN.matcher(Helper.getText(binding.spec));
             if (matcher.find()) {
-                SketchwareUtil.showMessage(getApplicationContext(), "Invalid block params");
+                SketchwareUtil.showMessage(getApplicationContext(), getString(R.string.java_invalid_block_params));
                 return;
             }
             if (Helper.getText(binding.type).isEmpty()) {
@@ -339,14 +339,14 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (mode.equals("add")) {
             blockPosition = Integer.parseInt(getIntent().getStringExtra("pallet"));
             binding.colour.setText(palletColour);
-            getSupportActionBar().setTitle("Add a new block");
+            getSupportActionBar().setTitle(R.string.java_add_new_block);
             return;
         }
         blockPosition = Integer.parseInt(getIntent().getStringExtra("pos"));
         binding.colour.setText(palletColour);
-        getSupportActionBar().setTitle("Insert block");
+        getSupportActionBar().setTitle(pro.sketchware.R.string.common_word_insert_block);
         if (mode.equals("edit")) {
-            getSupportActionBar().setTitle("Edit block");
+            getSupportActionBar().setTitle(pro.sketchware.R.string.common_word_edit_block);
             fillUpInputs(blockPosition);
         }
     }
@@ -358,7 +358,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (nameObject instanceof String) {
             binding.name.setText((String) nameObject);
         } else {
-            binding.nameLayout.setError("Invalid name block data");
+            binding.nameLayout.setError(getString(R.string.java_invalid_block_data, "name"));
             binding.nameLayout.setErrorEnabled(true);
         }
 
@@ -371,7 +371,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                 binding.type.setText(typeString);
             }
         } else {
-            binding.typeLayout.setError("Invalid type block data");
+            binding.typeLayout.setError(getString(R.string.java_invalid_block_data, "type"));
             binding.typeLayout.setErrorEnabled(true);
         }
 
@@ -380,7 +380,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (typeName instanceof String) {
                 binding.typename.setText((String) typeName);
             } else {
-                binding.typenameLayout.setError("Invalid typeName block data");
+                binding.typenameLayout.setError(getString(R.string.java_invalid_block_data, "typeName"));
                 binding.typenameLayout.setErrorEnabled(true);
             }
         }
@@ -389,7 +389,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (specObject instanceof String) {
             binding.spec.setText((String) specObject);
         } else {
-            binding.specLayout.setError("Invalid spec block data");
+            binding.specLayout.setError(getString(R.string.java_invalid_block_data, "spec"));
             binding.specLayout.setErrorEnabled(true);
         }
 
@@ -398,7 +398,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (spec2Object instanceof String) {
                 binding.spec2.setText((String) spec2Object);
             } else {
-                binding.spec2Layout.setError("Invalid spec2 block data");
+                binding.spec2Layout.setError(getString(R.string.java_invalid_block_data, "spec2"));
                 binding.spec2Layout.setErrorEnabled(true);
             }
         }
@@ -408,7 +408,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (importsObject instanceof String) {
                 binding.customImport.setText((String) importsObject);
             } else {
-                binding.customImportLayout.setError("Invalid imports block data");
+                binding.customImportLayout.setError(getString(R.string.java_invalid_block_data, "imports"));
                 binding.customImportLayout.setErrorEnabled(true);
             }
         }
@@ -418,7 +418,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (colorObject instanceof String) {
                 binding.colour.setText((String) colorObject);
             } else {
-                binding.colourLayout.setError("Invalid color block data");
+                binding.colourLayout.setError(getString(R.string.java_invalid_block_data, "color"));
                 binding.colourLayout.setErrorEnabled(true);
             }
         } else {
@@ -429,7 +429,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (codeObject instanceof String) {
             binding.code.setText((String) codeObject);
         } else {
-            binding.code.setHint("(Invalid code block data)");
+            binding.code.setHint(R.string.java_invalid_code_block_data);
         }
     }
 
@@ -445,7 +445,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     if (name instanceof String) {
                         id_detector.add((String) name);
                     } else {
-                        SketchwareUtil.toastError("Custom Block #" + i + " in current palette has an invalid name");
+                        SketchwareUtil.toastError(getString(R.string.java_custom_block_name_invalid, i));
                     }
                 }
                 return;
@@ -471,7 +471,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (matcher.find()) {
                 int position = matcher.end();
                 //Unable to resolve this error because the Rs class still undecompiled.
-                block.setText("Error: '%m' must be followed by '.param' at position " + position);
+                block.setText(getString(R.string.java_block_parameter_error, position));
             } else {
                 block.setText(e.toString());
             }
@@ -502,7 +502,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("palette", String.valueOf(blockPosition));
         blocksList.add(tempMap);
         FileUtil.writeFile(path, getGson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
         finish();
     }
 
@@ -527,7 +527,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("palette", blocksList.get(position).get("palette"));
         blocksList.add(position, tempMap);
         FileUtil.writeFile(path, getGson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
         finish();
     }
 
@@ -548,7 +548,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("imports", Helper.getText(binding.customImport));
         tempMap.put("code", Helper.getText(binding.code));
         FileUtil.writeFile(path, getGson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(pro.sketchware.SketchApplication.getContext().getString(pro.sketchware.R.string.common_word_saved));
         finish();
     }
 }

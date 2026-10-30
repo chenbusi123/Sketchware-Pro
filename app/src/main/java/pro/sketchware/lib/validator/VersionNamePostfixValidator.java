@@ -7,6 +7,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.regex.Pattern;
 
 import a.a.a.MB;
+import pro.sketchware.R;
 
 public class VersionNamePostfixValidator extends MB {
 
@@ -23,10 +24,10 @@ public class VersionNamePostfixValidator extends MB {
             b.setError(null);
             d = true;
         } else if (se.contains(" ")) {
-            b.setError("Spaces aren't allowed to prevent crashes");
+            b.setError(a.getString(R.string.java_spaces_not_allowed));
             d = false;
         } else {
-            b.setError("Only use letters (a-zA-Z), numbers and Special characters (_)");
+            b.setError(a.getString(R.string.java_version_postfix_chars));
             d = false;
         }
     }

@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import pro.sketchware.R;
 import pro.sketchware.activities.main.fragments.projects_store.adapters.ProjectScreenshotsAdapter;
 import pro.sketchware.activities.main.fragments.projects_store.api.ProjectModel;
 import pro.sketchware.databinding.FragmentStoreProjectPreviewBinding;
@@ -69,11 +70,13 @@ public class ProjectPreviewActivity extends BaseAppCompatActivity {
 
         addChip(project.getCategory());
 
-        binding.downloads.setText("Downloads: " + project.getDownloads());
-        binding.filesize.setText("Size: " + project.getProjectSize());
-        binding.timestamp.setText("Released: " + DateFormat.getDateInstance().format(new Date(Long.parseLong(project.getPublishedTimestamp()))));
+        binding.downloads.setText(getString(R.string.java_downloads_value, project.getDownloads()));
+        binding.filesize.setText(getString(R.string.java_size_value, project.getProjectSize()));
+        binding.timestamp.setText(getString(R.string.java_released_value,
+                DateFormat.getDateInstance().format(new Date(Long.parseLong(project.getPublishedTimestamp())))));
         binding.btnComments.setOnClickListener(v -> openCommentsSheet());
-        binding.btnDownload.setOnClickListener(v -> SketchwareUtil.toastError("Downloading projects is unavailable right now!"));
+        binding.btnDownload.setOnClickListener(v ->
+                SketchwareUtil.toastError(getString(R.string.java_project_download_unavailable)));
         binding.btnOpenIn.setOnClickListener(v -> openProject());
         binding.btnBack.setOnClickListener(v -> finish());
 

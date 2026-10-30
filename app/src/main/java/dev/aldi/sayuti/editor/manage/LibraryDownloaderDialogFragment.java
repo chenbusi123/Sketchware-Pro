@@ -133,14 +133,14 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
     private void initDownloadFlow() {
         dependencyName = Helper.getText(binding.dependencyInput);
         if (dependencyName.isEmpty()) {
-            binding.dependencyInputLayout.setError("Please enter a dependency");
+            binding.dependencyInputLayout.setError(getString(R.string.java_dependency_required));
             binding.dependencyInputLayout.setErrorEnabled(true);
             return;
         }
 
         var parts = dependencyName.split(":");
         if (parts.length != 3) {
-            binding.dependencyInputLayout.setError("Invalid dependency format");
+            binding.dependencyInputLayout.setError(getString(R.string.java_dependency_format_invalid));
             binding.dependencyInputLayout.setErrorEnabled(true);
             return;
         }
@@ -153,20 +153,21 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
 
         String message;
         if (skipSubdependencies) {
-            message = "Are you sure you want to download " + dependencyName;
+            message = getString(R.string.java_confirm_download_dependency, dependencyName);
         } else {
-            message = "Are you sure you want to download " + dependencyName + " and its sub-dependencies?";
+            message = getString(R.string.java_confirm_download_dependency_with_subdependencies, dependencyName);
         }
 
         new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Confirm Download")
+                .setTitle(pro.sketchware.R.string.common_word_confirm_download)
                 .setMessage(message)
-                .setPositiveButton("Download", (dialog, which) -> startDownloadProcess(group, artifact, version))
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton(pro.sketchware.R.string.common_word_download, (dialog, which) -> startDownloadProcess(group, artifact, version))
+                .setNegativeButton(pro.sketchware.R.string.cancel, null)
                 .show();
     }
 
     private void startDownloadProcess(String group, String artifact, String version) {
+        Context applicationContext = requireContext().getApplicationContext();
         binding.dependencyInputLayout.setErrorEnabled(false);
 
         binding.dependencyInfo.setVisibility(View.GONE);
@@ -220,7 +221,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onVersionNotFound(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Version not available");
+                        item.setError(applicationContext.getString(R.string.java_version_unavailable));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -239,7 +240,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onDependenciesNotFound(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Dependencies not found");
+                        item.setError(applicationContext.getString(R.string.java_dependencies_not_found));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -248,7 +249,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void onInvalidScope(@NonNull Artifact dep, @NonNull String scope) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Invalid scope: " + scope);
+                        item.setError(applicationContext.getString(R.string.java_scope_invalid, scope));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -257,7 +258,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void invalidPackaging(@NonNull Artifact dep) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dep);
-                        item.setError("Invalid packaging");
+                        item.setError(applicationContext.getString(R.string.java_packaging_invalid));
                         dependencyAdapter.updateDependency(item);
                     });
                 }
@@ -307,7 +308,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 public void dexingFailed(@NonNull Artifact dependency, @NonNull Exception e) {
                     handler.post(() -> {
                         DependencyDownloadItem item = findOrCreateDependencyItem(dependency);
-                        item.setError("Dexing failed: " + e.getMessage());
+                        item.setError(applicationContext.getString(R.string.java_dexing_failed, e.getMessage()));
                         dependencyAdapter.updateDependency(item);
                         setDownloadState(false);
                         SketchwareUtil.showAnErrorOccurredDialog(getActivity(),
@@ -318,7 +319,7 @@ public class LibraryDownloaderDialogFragment extends BottomSheetDialogFragment {
                 @Override
                 public void onTaskCompleted(@NonNull List<String> dependencies) {
                     handler.post(() -> {
-                        SketchwareUtil.toast("Library downloaded successfully");
+                        SketchwareUtil.toast(applicationContext.getString(R.string.java_library_downloaded));
                         if (!notAssociatedWithProject) {
                             var fileContent = FileUtil.readFile(localLibFile);
                             var enabledLibs = gson.fromJson(fileContent, Helper.TYPE_MAP_LIST);

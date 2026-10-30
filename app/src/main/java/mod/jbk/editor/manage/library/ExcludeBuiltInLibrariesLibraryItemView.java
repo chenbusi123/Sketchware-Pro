@@ -10,6 +10,7 @@ import com.besome.sketch.editor.manage.library.LibraryItemView;
 import java.util.List;
 
 import mod.jbk.build.BuiltInLibraries;
+import pro.sketchware.R;
 
 public class ExcludeBuiltInLibrariesLibraryItemView extends LibraryItemView {
     private final String sc_id;
@@ -30,7 +31,7 @@ public class ExcludeBuiltInLibrariesLibraryItemView extends LibraryItemView {
                         : String.format(ExcludeBuiltInLibrariesActivity.getSelectedLibrariesItemDescription(),
                         excludedLibraries.size(), BuiltInLibraries.KNOWN_BUILT_IN_LIBRARIES.length)
         );
-        enabled.setText(excludingEnabled ? "ON" : "OFF");
+        enabled.setText(getContext().getString(excludingEnabled ? R.string.common_word_on : R.string.common_word_off));
         enabled.setSelected(excludingEnabled);
     }
 }

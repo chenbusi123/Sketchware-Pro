@@ -129,13 +129,13 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
     private void showDial(int pos) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle("Edit Value");
+        dialog.setTitle(pro.sketchware.R.string.common_word_edit_value);
         DialogCreateNewFileLayoutBinding attributeBinding = DialogCreateNewFileLayoutBinding.inflate(getLayoutInflater());
         attributeBinding.chipGroupTypes.setVisibility(View.GONE);
         dialog.setView(attributeBinding.getRoot());
 
         attributeBinding.inputText.setText((String) listMap.get(pos).get("value"));
-        attributeBinding.inputText.setHint("android:attr=\"value\"");
+        attributeBinding.inputText.setHint(R.string.java_manifest_attribute_hint);
         dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
             listMap.get(pos).put("value", Helper.getText(attributeBinding.inputText));
             applyChange();
@@ -146,13 +146,13 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
     private void showAddDial() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("permission") ? "Add new permission" : "Add new attribute");
+        dialog.setTitle(type.equals("permission") ? R.string.java_add_new_permission : R.string.java_add_new_attribute);
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
         if (type.equals("permission")) {
             attributeBinding.inputRes.setText("android");
             attributeBinding.inputAttr.setText("name");
-            attributeBinding.inputLayoutValue.setHint("permission");
+            attributeBinding.inputLayoutValue.setHint(pro.sketchware.R.string.common_word_permission);
         }
         dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
             String fstr = Helper.getText(attributeBinding.inputRes).trim() + ":" + Helper.getText(attributeBinding.inputAttr).trim() + "=\"" + Helper.getText(attributeBinding.inputValue).trim() + "\"";
@@ -239,8 +239,8 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
             attributeView.setOnClickListener(v -> showDial(position));
             attributeView.setOnLongClickListener(v -> {
                 new MaterialAlertDialogBuilder(AndroidManifestInjectionDetails.this)
-                        .setTitle("Delete this attribute?")
-                        .setMessage("This action cannot be undone.")
+                        .setTitle(R.string.java_delete_attribute)
+                        .setMessage(R.string.java_action_undo_warning)
                         .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                             listMap.remove(position);
                             applyChange();

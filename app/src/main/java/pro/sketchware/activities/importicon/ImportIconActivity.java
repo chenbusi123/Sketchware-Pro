@@ -52,7 +52,6 @@ import a.a.a.oB;
 import a.a.a.uq;
 import a.a.a.wq;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
 import pro.sketchware.activities.importicon.adapters.IconAdapter;
 import pro.sketchware.activities.resourceseditor.components.utils.ColorsEditorManager;
 import pro.sketchware.databinding.DialogFilterIconsLayoutBinding;
@@ -295,9 +294,9 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle("Filter icons")
-                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton("Apply", null)
+                .setTitle(pro.sketchware.R.string.common_word_filter_icons)
+                .setNegativeButton(pro.sketchware.R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton(pro.sketchware.R.string.common_word_apply, null)
                 .create();
         dialog.setView(dialogBinding.getRoot());
 
@@ -414,8 +413,8 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
                 .setTitle(R.string.common_word_save)
-                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton("Save", null)
+                .setNegativeButton(pro.sketchware.R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton(pro.sketchware.R.string.myprojects_settings_button_save, null)
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {

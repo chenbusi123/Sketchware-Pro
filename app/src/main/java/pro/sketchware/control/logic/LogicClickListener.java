@@ -92,11 +92,11 @@ public class LogicClickListener implements View.OnClickListener {
 
     private void addCustomVariable() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(logicEditor);
-        dialog.setTitle("Add a new custom variable");
+        dialog.setTitle(R.string.java_add_custom_variable);
 
         AddCustomVariableBinding binding = AddCustomVariableBinding.inflate(logicEditor.getLayoutInflater());
 
-        binding.modifierLayout.setHelperText("Enter modifier e.g. private, public, public static, or empty (package private).");
+        binding.modifierLayout.setHelperText(getContext().getString(R.string.java_modifier_help));
 
         VariableModifierValidator modifiersValidator = new VariableModifierValidator(getContext(), binding.modifierLayout);
         binding.modifier.addTextChangedListener(modifiersValidator);
@@ -128,7 +128,7 @@ public class LogicClickListener implements View.OnClickListener {
             } else {
                 binding.typeLayout.requestFocus();
                 if (variableType.isEmpty()) {
-                    binding.typeLayout.setError("Type can't be empty");
+                    binding.typeLayout.setError(getContext().getString(R.string.java_type_empty));
                     binding.typeLayout.setErrorEnabled(true);
                 }
                 return;
@@ -140,7 +140,7 @@ public class LogicClickListener implements View.OnClickListener {
             } else {
                 binding.nameLayout.requestFocus();
                 if (variableName.isEmpty()) {
-                    binding.nameLayout.setError("Name can't be empty");
+                    binding.nameLayout.setError(getContext().getString(R.string.java_name_cant_be_empty));
                     binding.nameLayout.setErrorEnabled(true);
                 }
                 return;
@@ -220,7 +220,7 @@ public class LogicClickListener implements View.OnClickListener {
 
     private void addCustomList() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(logicEditor);
-        dialog.setTitle("Add a new custom List");
+        dialog.setTitle(R.string.java_add_custom_list);
 
         AddCustomListBinding listBinding = AddCustomListBinding.inflate(logicEditor.getLayoutInflater());
 
@@ -239,18 +239,18 @@ public class LogicClickListener implements View.OnClickListener {
                 listBinding.typeLayout.setErrorEnabled(false);
             } else {
                 if (validName) listBinding.typeLayout.requestFocus();
-                listBinding.typeLayout.setError("Type can't be empty");
+                listBinding.typeLayout.setError(getContext().getString(R.string.java_type_empty));
                 listBinding.typeLayout.setErrorEnabled(true);
             }
 
             CharSequence nameError = listBinding.nameLayout.getError();
-            if (nameError == null || "Name can't be empty".contentEquals(nameError)) {
+            if (nameError == null || getContext().getString(R.string.java_name_cant_be_empty).contentEquals(nameError)) {
                 if (validName) {
                     listBinding.nameLayout.setError(null);
                     listBinding.nameLayout.setErrorEnabled(false);
                 } else {
                     listBinding.nameLayout.requestFocus();
-                    listBinding.nameLayout.setError("Name can't be empty");
+                    listBinding.nameLayout.setError(getContext().getString(R.string.java_name_cant_be_empty));
                     listBinding.nameLayout.setErrorEnabled(true);
                 }
             }
